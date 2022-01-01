@@ -1,0 +1,24 @@
+.bg-dark {
+  background-color: #9f5540 !important;
+}
+
+.container-fluid > .btn-secondary {
+  text-transform: uppercase;
+  border-radius: 0;
+  margin-left: 5%;
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+  color: #9f5540 !important;
+  border-width: 10px 50px 5px 50px;
+  font-size: 10px;
+}
+
+li > a {
+  color: #ffffff !important;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+.profile {
+  display: inline-block;
+}
