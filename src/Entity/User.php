@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -27,13 +29,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified;
 
-    #[ORM\ManyToOne(targetEntity: Rent::class, inversedBy: 'users')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $rent;
+    #[ORM\OneToMany(mappedBy: 'tenant', targetEntity: Rent::class)]
+    private $tenants;
 
-    #[ORM\ManyToOne(targetEntity: Residence::class, inversedBy: 'users')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $residence;
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Residence::class)]
+    private $owners;
+
+    #[ORM\OneToMany(mappedBy: 'representative', targetEntity: Residence::class)]
+    private $representatives;
+
+    public function __construct()
+    {
+        $this->tenants = new ArrayCollection();
+        $this->owners = new ArrayCollection();
+        $this->representatives = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -117,26 +127,92 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRent(): ?Rent
+    /**
+     * @return Collection|Rent[]
+     */
+    public function getTenants(): Collection
     {
-        return $this->rent;
+        return $this->tenants;
     }
 
-    public function setRent(?Rent $rent): self
+    public function addTenant(Rent $tenant): self
     {
-        $this->rent = $rent;
+        if (!$this->tenants->contains($tenant)) {
+            $this->tenants[] = $tenant;
+            $tenant->setTenant($this);
+        }
 
         return $this;
     }
 
-    public function getResidence(): ?Residence
+    public function removeTenant(Rent $tenant): self
     {
-        return $this->residence;
+        if ($this->tenants->removeElement($tenant)) {
+            // set the owning side to null (unless already changed)
+            if ($tenant->getTenant() === $this) {
+                $tenant->setTenant(null);
+            }
+        }
+
+        return $this;
     }
 
-    public function setResidence(?Residence $residence): self
+    /**
+     * @return Collection|Residence[]
+     */
+    public function getOwners(): Collection
     {
-        $this->residence = $residence;
+        return $this->owners;
+    }
+
+    public function addOwner(Residence $owner): self
+    {
+        if (!$this->owners->contains($owner)) {
+            $this->owners[] = $owner;
+            $owner->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOwner(Residence $owner): self
+    {
+        if ($this->owners->removeElement($owner)) {
+            // set the owning side to null (unless already changed)
+            if ($owner->getOwner() === $this) {
+                $owner->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Residence[]
+     */
+    public function getRepresentatives(): Collection
+    {
+        return $this->representatives;
+    }
+
+    public function addRepresentative(Residence $representative): self
+    {
+        if (!$this->representatives->contains($representative)) {
+            $this->representatives[] = $representative;
+            $representative->setRepresentative($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRepresentative(Residence $representative): self
+    {
+        if ($this->representatives->removeElement($representative)) {
+            // set the owning side to null (unless already changed)
+            if ($representative->getRepresentative() === $this) {
+                $representative->setRepresentative(null);
+            }
+        }
 
         return $this;
     }
