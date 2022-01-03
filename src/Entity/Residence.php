@@ -33,22 +33,20 @@ class Residence
     #[ORM\Column(type: 'string', length: 255)]
     private $inventory_file;
 
-    #[ORM\Column(type: 'integer')]
-    private $owner_id;
+    #[ORM\OneToMany(mappedBy: 'residence', targetEntity: Rent::class)]
+    private $residences;
 
-    #[ORM\Column(type: 'integer')]
-    private $representative_id;
-
-    #[ORM\ManyToOne(targetEntity: Rent::class, inversedBy: 'residences')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'residences')]
     #[ORM\JoinColumn(nullable: false)]
-    private $rent;
+    private $owner;
 
-    #[ORM\OneToMany(mappedBy: 'residence', targetEntity: User::class)]
-    private $users;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'representatives')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $representative;
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->residences = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -128,68 +126,56 @@ class Residence
         return $this;
     }
 
-    public function getOwnerId(): ?int
-    {
-        return $this->owner_id;
-    }
-
-    public function setOwnerId(int $owner_id): self
-    {
-        $this->owner_id = $owner_id;
-
-        return $this;
-    }
-
-    public function getRepresentativeId(): ?int
-    {
-        return $this->representative_id;
-    }
-
-    public function setRepresentativeId(int $representative_id): self
-    {
-        $this->representative_id = $representative_id;
-
-        return $this;
-    }
-
-    public function getRent(): ?Rent
-    {
-        return $this->rent;
-    }
-
-    public function setRent(?Rent $rent): self
-    {
-        $this->rent = $rent;
-
-        return $this;
-    }
-
     /**
-     * @return Collection|User[]
+     * @return Collection|Rent[]
      */
-    public function getUsers(): Collection
+    public function getResidences(): Collection
     {
-        return $this->users;
+        return $this->residences;
     }
 
-    public function addUser(User $user): self
+    public function addResidence(Rent $residence): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setResidence($this);
+        if (!$this->residences->contains($residence)) {
+            $this->residences[] = $residence;
+            $residence->setResidence($this);
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeResidence(Rent $residence): self
     {
-        if ($this->users->removeElement($user)) {
+        if ($this->residences->removeElement($residence)) {
             // set the owning side to null (unless already changed)
-            if ($user->getResidence() === $this) {
-                $user->setResidence(null);
+            if ($residence->getResidence() === $this) {
+                $residence->setResidence(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getRepresentative(): ?User
+    {
+        return $this->representative;
+    }
+
+    public function setRepresentative(?User $representative): self
+    {
+        $this->representative = $representative;
 
         return $this;
     }

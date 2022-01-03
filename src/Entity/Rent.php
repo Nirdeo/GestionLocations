@@ -15,12 +15,6 @@ class Rent
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
-    private $tenant_id;
-
-    #[ORM\Column(type: 'integer')]
-    private $residence_id;
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $inventory_file;
 
@@ -36,7 +30,7 @@ class Rent
     #[ORM\Column(type: 'string', length: 255)]
     private $tenant_signature;
 
-    #[ORM\Column(type: 'string', length: 45)]
+    #[ORM\Column(type: 'datetime')]
     private $tenant_validated_at;
 
     #[ORM\Column(type: 'text')]
@@ -48,45 +42,17 @@ class Rent
     #[ORM\Column(type: 'datetime')]
     private $representative_validated_at;
 
-    #[ORM\OneToMany(mappedBy: 'rent', targetEntity: User::class, orphanRemoval: true)]
-    private $users;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'rents')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $tenant;
 
-    #[ORM\OneToMany(mappedBy: 'rent', targetEntity: Residence::class)]
-    private $residences;
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-        $this->residences = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(targetEntity: Residence::class, inversedBy: 'rents')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $residence;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTenantId(): ?int
-    {
-        return $this->tenant_id;
-    }
-
-    public function setTenantId(int $tenant_id): self
-    {
-        $this->tenant_id = $tenant_id;
-
-        return $this;
-    }
-
-    public function getResidenceId(): ?int
-    {
-        return $this->residence_id;
-    }
-
-    public function setResidenceId(int $residence_id): self
-    {
-        $this->residence_id = $residence_id;
-
-        return $this;
     }
 
     public function getInventoryFile(): ?string
@@ -149,12 +115,12 @@ class Rent
         return $this;
     }
 
-    public function getTenantValidatedAt(): ?string
+    public function getTenantValidatedAt(): ?\DateTimeInterface
     {
         return $this->tenant_validated_at;
     }
 
-    public function setTenantValidatedAt(string $tenant_validated_at): self
+    public function setTenantValidatedAt(\DateTimeInterface $tenant_validated_at): self
     {
         $this->tenant_validated_at = $tenant_validated_at;
 
@@ -197,62 +163,26 @@ class Rent
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
+    public function getTenant(): ?User
     {
-        return $this->users;
+        return $this->tenant;
     }
 
-    public function addUser(User $user): self
+    public function setTenant(?User $tenant): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setRent($this);
-        }
+        $this->tenant = $tenant;
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function getResidence(): ?Residence
     {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getRent() === $this) {
-                $user->setRent(null);
-            }
-        }
-
-        return $this;
+        return $this->residence;
     }
 
-    /**
-     * @return Collection|Residence[]
-     */
-    public function getResidences(): Collection
+    public function setResidence(?Residence $residence): self
     {
-        return $this->residences;
-    }
-
-    public function addResidence(Residence $residence): self
-    {
-        if (!$this->residences->contains($residence)) {
-            $this->residences[] = $residence;
-            $residence->setRent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeResidence(Residence $residence): self
-    {
-        if ($this->residences->removeElement($residence)) {
-            // set the owning side to null (unless already changed)
-            if ($residence->getRent() === $this) {
-                $residence->setRent(null);
-            }
-        }
+        $this->residence = $residence;
 
         return $this;
     }
