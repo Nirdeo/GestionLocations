@@ -18,14 +18,16 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 1; $i < 6; $i++) {
+        for ($i = 1; $i < 10; $i++) {
             $user = new User();
-            $password = $this->passwordHasher->hashPassword($user, 'pass_1234');
+            $roles = array(['ROLE_OWNER'], ['ROLE_TENANT'], ['ROLE_REPRESENTATIVE']);
+            $rand_keys = array_rand($roles);
+            $password = $this->passwordHasher->hashPassword($user, 'pass_1234' . $i);
             $user
                 ->setEmail('test@example' . $i . 'com')
                 ->setPassword($password)
                 ->setIsVerified(true)
-                ->setRoles(['ROLE_OWNER']);
+                ->setRoles($roles[$rand_keys]);
             $this->addReference('user-' . $i, $user);
             $manager->persist($user);
         }

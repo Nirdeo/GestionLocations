@@ -10,3 +10,33 @@ index:
     path: /
     methods: [ "GET" ]
     controller: App\Controller\DefaultController::index
+
+locataires:
+    path: /locataires
+    methods: [ "GET" ]
+    controller: App\Controller\LocataireController::index
+
+locataires_update:
+    path: /locataires/update/{id}
+    methods: [ "GET" ]
+    controller: App\Controller\LocataireController::update
+
+locataires_add:
+    path: /locataires/add/{id}
+    methods: [ "GET" ]
+    controller: App\Controller\LocataireController::add
+
+locations:
+    path: /locations
+    methods: [ "GET" ]
+    controller: App\Controller\LocationController::index
+
+locations_signloc:
+    path: /locations/signloc/{id}
+    methods: [ "GET" ]
+    controller: App\Controller\LocationController::signloc
+
+locations_signman:
+    path: /locations/signman/{id}
+    methods: [ "GET" ]
+    controller: App\Controller\LocationController::signman

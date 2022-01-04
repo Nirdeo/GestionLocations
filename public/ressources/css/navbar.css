@@ -13,7 +13,7 @@
   font-size: 10px;
 }
 
-li > a {
+.nav-link {
   color: #ffffff !important;
   text-transform: uppercase;
   text-decoration: underline;

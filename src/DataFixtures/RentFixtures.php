@@ -11,17 +11,17 @@ class RentFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        for ($i = 1; $i < 6; $i++) {
+        for ($i = 1; $i < 10; $i++) {
             $rent = new Rent();
             $rent
                 ->setInventoryFile('Canapé')
-                ->setTenant($this->getReference('user-' . $i))
-                ->setResidence($this->getReference('residence-' . $i))
+                ->setTenant($this->getReference('user-' . random_int(1, 5)))
+                ->setResidence($this->getReference('residence-' . random_int(6, 9)))
                 ->setTenantValidatedAt(new \DateTime('now'))
                 ->setTenantSignature('Signature du locataire n°' . $i)
-                ->setTenantComments('Très bien')
-                ->setRepresentativeComments('Très bien')
-                ->setRepresentativeSignature('AirBnb')
+                ->setTenantComments('Commentaire-' . $i)
+                ->setRepresentativeComments('Commentaire-' . $i)
+                ->setRepresentativeSignature('Signature du représentant n°' . $i)
                 ->setRepresentativeValidatedAt(new \DateTime('now'))
                 ->setArrivalDate(new \DateTime('2019-01-' . $i))
                 ->setDepartureDate(new \DateTime('2019-02-' . $i));
