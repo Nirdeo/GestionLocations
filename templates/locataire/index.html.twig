@@ -3,62 +3,54 @@
 {% block title %}Hello LocataireController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Victo/OneDrive/Documents/BTS2/Web/GestionLocations/src/Controller/LocataireController.php'|file_link(0) }}">src/Controller/LocataireController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Victo/OneDrive/Documents/BTS2/Web/GestionLocations/templates/locataire/index.html.twig'|file_link(0) }}">templates/locataire/index.html.twig</a></code></li>
-    </ul>
-    <button type="button" class="btn btn-success">Nouveau locataire</button>
-</div>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Prénom</th>
-            <th scope="col">Nombre de locations</th>
-            <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <th scope="row">3</th>
-        <td>White</td>
-        <td>Gordon</td>
-        <td>1</td>
-        <td><button type="button" class="btn btn-secondary">Mettre à jour les données</button></td>
-        </tbody>
-    </table>
-    <div>
-        <ul class="pagination">
-            <li class="page-item disabled">
-                <a class="page-link" href="#">Précédent</a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">4</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">5</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">Suivant</a>
-            </li>
-        </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Gestion des locataires <a type="button" class="btn btn-success" href="{{ path('locataires_add') }}">Nouveau locataire</a></p>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Nombre de locations</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th scope="row">3</th>
+                <td>White</td>
+                <td>Gordon</td>
+                <td>1</td>
+                <td>
+                    <a type="button" class="btn btn-secondary">Mettre à jour les données</a>
+                </td>
+                </tbody>
+            </table>
+            <div>
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Précédent</a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">4</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">5</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Suivant</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 {% endblock %}
