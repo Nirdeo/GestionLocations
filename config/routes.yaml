@@ -30,21 +30,29 @@ app_locataire_new:
   path: /locataire/{id}/new
   methods: [ "GET", "POST" ]
   controller: App\Controller\LocataireController::new
+  requirements:
+    id: '\d+'
 
 app_locataire_show:
   path: /locataire/{id}
   methods: [ "GET" ]
   controller: App\Controller\LocataireController::show
+  requirements:
+    id: '\d+'
 
 app_locataire_edit:
   path: /locataire/{id}/edit
   methods: [ "GET", "POST" ]
   controller: App\Controller\LocataireController::edit
+  requirements:
+    id: '\d+'
 
 app_locataire_delete:
   path: /locataire/{id}
   methods: [ "POST" ]
   controller: App\Controller\LocataireController::delete
+  requirements:
+    id: '\d+'
 
 app_location_index:
   path: /location/
@@ -55,13 +63,19 @@ app_location_show:
   path: /location/{id}
   methods: [ "GET" ]
   controller: App\Controller\LocationController::show
+  requirements:
+    id: '\d+'
 
 app_location_edit:
   path: /location/{id}/edit
   methods: [ "GET", "POST" ]
   controller: App\Controller\LocationController::edit
+  requirements:
+    id: '\d+'
 
 app_location_delete:
   path: /location/{id}
   methods: [ "POST" ]
   controller: App\Controller\LocationController::delete
+  requirements:
+    id: '\d+'

@@ -23,7 +23,7 @@ GitHub.
 
 ## Installation
 
-Pour installer et utiliser le projet, il faut suivre les étapes suivantes:
+Pour installer et utiliser le projet, il faut suivre les étapes suivantes :
 
 - D'abord il faut avoir un compte GitHub et accéder au repository suivant afin de télécharger le
   projet : [GestionLocations](https://github.com/Nirdeo/GestionLocations)

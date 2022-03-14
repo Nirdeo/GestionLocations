@@ -6,7 +6,7 @@ use App\Entity\Rent;
 use App\Entity\Residence;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,24 +16,32 @@ class LocationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('arrivalDate', DateType::class,[
-            'widget' => 'single_text',
-
-            // prevents rendering it as type="date", to avoid HTML5 date pickers
-            'html5' => false,
-
-            // adds a class that can be selected in JavaScript
-            'attr' => ['class' => 'js-datepicker'],
-        ])
-            ->add('departureDate', DateType::class,[
-            'widget' => 'single_text',
-
-            // prevents rendering it as type="date", to avoid HTML5 date pickers
-            'html5' => false,
-
-            // adds a class that can be selected in JavaScript
-            'attr' => ['class' => 'js-datepicker'],
-        ])
+            ->add('arrivalDate', DateTimeType::class, [
+                'label' => 'Date d\'arrivée',
+                'widget' => 'single_text',
+                'html5' => false,
+                'format' => 'dd/MM/yyyy',
+                'attr' => [
+                    'class' => 'js-datepicker',
+                    'data-provide' => 'datepicker',
+                    'data-date-format' => 'dd/mm/yyyy',
+                    'data-date-language' => 'fr',
+                    'data-date-autoclose' => 'true',
+                ],
+            ])
+            ->add('departureDate', DateTimeType::class, [
+                'label' => 'Date de départ',
+                'widget' => 'single_text',
+                'html5' => false,
+                'format' => 'dd/mm/yyyy',
+                'attr' => [
+                    'class' => 'js-datepicker',
+                    'data-provide' => 'datepicker',
+                    'data-date-format' => 'dd/mm/yyyy',
+                    'data-date-language' => 'fr',
+                    'data-date-autoclose' => 'true',
+                ],
+            ])
             ->add('residence', EntityType::class, [
                 'class' => Residence::class,
                 'choice_label' => 'name',

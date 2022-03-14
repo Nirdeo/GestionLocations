@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/locataire')]
@@ -25,10 +26,8 @@ class LocataireController extends AbstractController
         ]);
     }
 
-
-
     #[Route('/{id}/new', name: 'app_locataire_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, RentRepository $locationRepository): Response
+    public function new(Request $request, User $locataire, EntityManagerInterface $entityManager, RentRepository $locationRepository): Response
     {
         $location = new Rent();
         $form = $this->createForm(LocationType::class, $location);
@@ -42,9 +41,10 @@ class LocataireController extends AbstractController
         }
 
         return $this->renderForm('locataire/new.html.twig', [
+            'locataire' => $locataire,
             'location' => $location,
             'form' => $form,
-            'locations' => $locationRepository->findAll()
+            'locations' => $locationRepository->findBy(['tenant' => $locataire]),
         ]);
     }
 
@@ -57,12 +57,19 @@ class LocataireController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_locataire_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $locataire, EntityManagerInterface $entityManager, RentRepository $locationRepository): Response
+    public function edit(Request $request, User $locataire, EntityManagerInterface $entityManager, RentRepository $locationRepository, UserPasswordHasherInterface $locatairePasswordHasher): Response
     {
         $form = $this->createForm(LocataireType::class, $locataire);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $locataire->setPassword(
+                $locatairePasswordHasher->hashPassword(
+                    $locataire,
+                    $form->get('password')->getData()
+                )
+            );
             $entityManager->flush();
 
             return $this->redirectToRoute('app_locataire_index', [], Response::HTTP_SEE_OTHER);
@@ -71,7 +78,7 @@ class LocataireController extends AbstractController
         return $this->renderForm('locataire/edit.html.twig', [
             'locataire' => $locataire,
             'form' => $form,
-            'locations' => $locationRepository->findAll(),
+            'locations' => $locationRepository->findBy(['tenant' => $locataire])
         ]);
     }
 

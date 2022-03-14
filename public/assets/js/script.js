@@ -5,7 +5,6 @@ $(document).ready(function () {
         }
     });
     $('.js-datepicker').datepicker({
-        format: 'yyyy-mm-dd',
         format: 'dd/mm/yyyy',
         startDate: '-3d',
         autoclose: true,
@@ -15,8 +14,5 @@ $(document).ready(function () {
         todayBtn: "linked",
         toggleActive: true,
         todayHighlight: true,
-        daysOfWeekDisabled: "0,1",
-        startDate: "01/01/2010",
-        format: "dd/mm/yyyy",
     });
 });
