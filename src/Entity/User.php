@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -19,6 +20,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private $email;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $firstName;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $lastName;
 
     #[ORM\Column(type: 'json')]
     private $roles = [];
@@ -48,6 +55,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
     }
 
     public function getEmail(): ?string

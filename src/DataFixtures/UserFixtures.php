@@ -9,7 +9,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
 {
-    private $passwordHasher;
+    private UserPasswordHasherInterface $passwordHasher;
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
@@ -24,7 +24,9 @@ class UserFixtures extends Fixture
             $rand_keys = array_rand($roles);
             $password = $this->passwordHasher->hashPassword($user, 'pass_1234' . $i);
             $user
-                ->setEmail('test@example' . $i . 'com')
+                ->setFirstName('White' . $i)
+                ->setLastName('Gordon' . $i)
+                ->setEmail('test@example' . $i . '.com')
                 ->setPassword($password)
                 ->setIsVerified(true)
                 ->setRoles($roles[$rand_keys]);

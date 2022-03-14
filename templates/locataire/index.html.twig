@@ -1,55 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LocataireController!{% endblock %}
+{% block title %}Gestion des locataires{% endblock %}
+
+{% block assets %}<script src={{ asset("assets/js/locataire.js") }}></script>{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-md-12">
-            <p>Gestion des locataires <a type="button" class="btn btn-success" href="{{ path('locataires_add') }}">Nouveau locataire</a></p>
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Nombre de locations</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <th scope="row">3</th>
-                <td>White</td>
-                <td>Gordon</td>
-                <td>1</td>
-                <td>
-                    <a type="button" class="btn btn-secondary">Mettre à jour les données</a>
-                </td>
-                </tbody>
-            </table>
-            <div>
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">Précédent</a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Suivant</a>
-                    </li>
-                </ul>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Gestion des locataires <a type="button" class="btn btn-green" href="#">Nouveau locataire</a></h1>
+                <table id="myTable" class="table table-striped" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Nombre de locations</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for locataire in locataires %}
+                        {% if locataire.roles == ["ROLE_TENANT","ROLE_USER"]  %}
+                            <tr>
+                                <td><strong>{{ locataire.id }}</strong></td>
+                                <td>{{ locataire.lastName }}</td>
+                                <td>{{ locataire.firstName }}</td>
+                                <td>1</td>
+                                <td>
+                                    <a href="{{ path('app_locataire_edit', {'id': locataire.id}) }}" type="button"
+                                       class="btn btn-secondary">Mettre à jour les données</a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

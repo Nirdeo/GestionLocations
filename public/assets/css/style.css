@@ -2,6 +2,18 @@ body {
     font-family: "Lato", sans-serif;
 }
 
-.card {
-    width: 15%;
+h1 {
+    color: #9f5540;
+}
+
+.btn-red {
+    color: #fff;
+    background-color: #9f5540;
+    border-color: #9f5540;
+}
+
+.btn-green {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #5cb85c;
 }

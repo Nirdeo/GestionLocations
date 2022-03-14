@@ -1,42 +1,67 @@
 controllers:
-    resource: ../src/Controller/
-    type: annotation
+  resource: ../src/Controller/
+  type: annotation
 
 kernel:
-    resource: ../src/Kernel.php
-    type: annotation
+  resource: ../src/Kernel.php
+  type: annotation
 
 index:
-    path: /
-    methods: [ "GET" ]
-    controller: App\Controller\DefaultController::index
-
-locataires:
-    path: /locataires
-    methods: [ "GET" ]
-    controller: App\Controller\LocataireController::index
-
-locataires_add:
-    path: /locataires/add/
-    methods: [ "GET" ]
-    controller: App\Controller\LocataireController::add
-
-locataires_update:
-    path: /locataires/update/{id}
-    methods: [ "GET" ]
-    controller: App\Controller\LocataireController::update
+  path: /
+  methods: [ "GET" ]
+  controller: App\Controller\DefaultController::index
 
 locations:
-    path: /locations
-    methods: [ "GET" ]
-    controller: App\Controller\LocationController::index
+  path: /locations
+  methods: [ "GET" ]
+  controller: App\Controller\LocationController::index
 
-locations_signloc:
-    path: /locations/signloc/{id}
-    methods: [ "GET" ]
-    controller: App\Controller\LocationController::signloc
+locations_update:
+  path: /locations/update/
+  methods: [ "GET", "POST" ]
+  controller: App\Controller\LocationController::edit
 
-locations_signman:
-    path: /locations/signman/{id}
-    methods: [ "GET" ]
-    controller: App\Controller\LocationController::signman
+app_locataire_index:
+  path: /locataire/
+  methods: [ "GET" ]
+  controller: App\Controller\LocataireController::index
+
+app_locataire_new:
+  path: /locataire/{id}/new
+  methods: [ "GET", "POST" ]
+  controller: App\Controller\LocataireController::new
+
+app_locataire_show:
+  path: /locataire/{id}
+  methods: [ "GET" ]
+  controller: App\Controller\LocataireController::show
+
+app_locataire_edit:
+  path: /locataire/{id}/edit
+  methods: [ "GET", "POST" ]
+  controller: App\Controller\LocataireController::edit
+
+app_locataire_delete:
+  path: /locataire/{id}
+  methods: [ "POST" ]
+  controller: App\Controller\LocataireController::delete
+
+app_location_index:
+  path: /location/
+  methods: [ "GET" ]
+  controller: App\Controller\LocationController::index
+
+app_location_show:
+  path: /location/{id}
+  methods: [ "GET" ]
+  controller: App\Controller\LocationController::show
+
+app_location_edit:
+  path: /location/{id}/edit
+  methods: [ "GET", "POST" ]
+  controller: App\Controller\LocationController::edit
+
+app_location_delete:
+  path: /location/{id}
+  methods: [ "POST" ]
+  controller: App\Controller\LocationController::delete

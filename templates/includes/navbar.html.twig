@@ -1,6 +1,6 @@
 {% block navbar %}
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-red">
         <div class="container-fluid">
             <button class="btn btn-secondary">Logo</button>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
@@ -9,14 +9,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
+                    <li class="nav-item" id="nav-accueil">
                         <a class="nav-link" href="{{ path('index') }}">Accueil</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('locataires') }}">Locataires</a>
+                    <li class="nav-item" id="nav-biens">
+                        <a class="nav-link" href="">Biens</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('locations') }}">Locations</a>
+                    <li class="nav-item" id="nav-locataires">
+                        <a class="nav-link" href="{{ path('app_locataire_index') }}">Locataires</a>
+                    </li>
+                    <li class="nav-item" id="nav-mandataires">
+                        <a class="nav-link" href="">Mandataires</a>
                     </li>
                 </ul>
             </div>
