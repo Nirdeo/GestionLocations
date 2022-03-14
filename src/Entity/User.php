@@ -37,7 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $isVerified;
 
     #[ORM\OneToMany(mappedBy: 'tenant', targetEntity: Rent::class)]
-    private $tenants;
+    private $rents;
 
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Residence::class)]
     private $owners;
@@ -161,27 +161,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection|Rent[]
      */
-    public function getTenants(): Collection
+    public function getRents(): Collection
     {
-        return $this->tenants;
+        return $this->rents;
     }
 
-    public function addTenant(Rent $tenant): self
+    public function addRent(Rent $rent): self
     {
-        if (!$this->tenants->contains($tenant)) {
-            $this->tenants[] = $tenant;
-            $tenant->setTenant($this);
+        if (!$this->rents->contains($rent)) {
+            $this->rents[] = $rent;
+            $rent->setTenant($this);
         }
 
         return $this;
     }
 
-    public function removeTenant(Rent $tenant): self
+    public function removeRent(Rent $rent): self
     {
-        if ($this->tenants->removeElement($tenant)) {
+        if ($this->rents->removeElement($rent)) {
             // set the owning side to null (unless already changed)
-            if ($tenant->getTenant() === $this) {
-                $tenant->setTenant(null);
+            if ($rent->getTenant() === $this) {
+                $rent->setTenant(null);
             }
         }
 

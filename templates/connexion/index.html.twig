@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConnexionController!{% endblock %}
+
+{% block body %}
+
+{ form_start(form, { attr: { id: 'form-edit_tenant', novalidate: 'novalidate' } }) }}
+{{ form_row(form_login) }}
+
+    <button type="submit" class="btn-success">inscription</button>
+{{form_end(form_login)}}
+
+
+{% endblock %}

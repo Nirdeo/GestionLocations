@@ -30,6 +30,7 @@ class LocataireController extends AbstractController
     public function new(Request $request, User $locataire, EntityManagerInterface $entityManager, RentRepository $locationRepository): Response
     {
         $location = new Rent();
+        $location->setTenant($locataire);
         $form = $this->createForm(LocationType::class, $location);
         $form->handleRequest($request);
 

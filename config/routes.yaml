@@ -91,3 +91,13 @@ app_mandataire_edit:
   controller: App\Controller\MandataireController::edit
   requirements:
     id: '\d+'
+
+connexion:
+    path: /connexion
+    methods: [ "GET", "POST" ]
+    controller: App\Controller\ConnexionController::index
+
+connexion_home:
+    path: /connexion/home/{id}
+    methods: [ "GET", "POST" ]
+    controller: App\Controller\ConnexionController::home

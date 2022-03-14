@@ -26,7 +26,7 @@
                                 <td><strong>{{ locataire.id }}</strong></td>
                                 <td>{{ locataire.lastName }}</td>
                                 <td>{{ locataire.firstName }}</td>
-                                <td>1</td>
+                                <td>{{ locataire.rents.count }}</td>
                                 <td>
                                     <a href="{{ path('app_locataire_edit', {'id': locataire.id}) }}" type="button"
                                        class="btn btn-secondary">Mettre à jour les données</a>

@@ -26,7 +26,7 @@
                                 <td><strong>{{ mandataire.id }}</strong></td>
                                 <td>{{ mandataire.lastName }}</td>
                                 <td>{{ mandataire.firstName }}</td>
-                                <td>1</td>
+                                <td>{{ mandataire.rents.count }}</td>
                                 <td>
                                     <a href="{{ path('app_mandataire_edit', {'id': mandataire.id}) }}" type="button"
                                        class="btn btn-secondary">Mettre à jour les données</a>
