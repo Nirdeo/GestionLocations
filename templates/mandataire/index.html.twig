@@ -1,20 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MandataireController!{% endblock %}
+{% block title %}Gestion des mandataires{% endblock %}
+
+{% block assets %}<script src={{ asset("assets/js/mandataire.js") }}></script>{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Victo/OneDrive/Documents/BTS2/Web/GestionLocations/src/Controller/MandataireController.php'|file_link(0) }}">src/Controller/MandataireController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Victo/OneDrive/Documents/BTS2/Web/GestionLocations/templates/mandataire/index.html.twig'|file_link(0) }}">templates/mandataire/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Gestion des mandataires <a type="button" class="btn btn-green" href="#">Nouveau mandataire</a></h1>
+                <table id="myTable" class="table table-striped" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Nombre de locations</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for mandataire in mandataires %}
+                        {% if mandataire.roles == ["ROLE_REPRESENTATIVE","ROLE_USER"]  %}
+                            <tr>
+                                <td><strong>{{ mandataire.id }}</strong></td>
+                                <td>{{ mandataire.lastName }}</td>
+                                <td>{{ mandataire.firstName }}</td>
+                                <td>1</td>
+                                <td>
+                                    <a href="{{ path('app_mandataire_edit', {'id': mandataire.id}) }}" type="button"
+                                       class="btn btn-secondary">Mettre à jour les données</a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

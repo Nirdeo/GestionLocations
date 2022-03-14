@@ -79,3 +79,15 @@ app_location_delete:
   controller: App\Controller\LocationController::delete
   requirements:
     id: '\d+'
+
+app_mandataire_index:
+  path: /mandataire/
+  methods: [ "GET" ]
+  controller: App\Controller\MandataireController::index
+
+app_mandataire_edit:
+  path: /mandataire/{id}/edit
+  methods: [ "GET", "POST" ]
+  controller: App\Controller\MandataireController::edit
+  requirements:
+    id: '\d+'
