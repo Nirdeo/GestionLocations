@@ -17,3 +17,12 @@ h1 {
     background-color: #5cb85c;
     border-color: #5cb85c;
 }
+
+.arrow {
+    display: contents;
+}
+
+.text-red {
+    --bs-text-opacity: 1;
+    color: #9f5540;
+}

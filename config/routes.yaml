@@ -59,24 +59,20 @@ app_location_index:
   methods: [ "GET" ]
   controller: App\Controller\LocationController::index
 
-app_location_show:
-  path: /location/{id}
-  methods: [ "GET" ]
-  controller: App\Controller\LocationController::show
-  requirements:
-    id: '\d+'
+app_location_newSM:
+  path: /location/{id}/newSM
+  methods: [ "GET", "POST" ]
+  controller: App\Controller\LocationController::newSM
+
+app_location_newSL:
+  path: /location/{id}/newSL
+  methods: [ "GET", "POST" ]
+  controller: App\Controller\LocationController::newSL
 
 app_location_edit:
   path: /location/{id}/edit
   methods: [ "GET", "POST" ]
   controller: App\Controller\LocationController::edit
-  requirements:
-    id: '\d+'
-
-app_location_delete:
-  path: /location/{id}
-  methods: [ "POST" ]
-  controller: App\Controller\LocationController::delete
   requirements:
     id: '\d+'
 
@@ -91,13 +87,3 @@ app_mandataire_edit:
   controller: App\Controller\MandataireController::edit
   requirements:
     id: '\d+'
-
-connexion:
-    path: /connexion
-    methods: [ "GET", "POST" ]
-    controller: App\Controller\ConnexionController::index
-
-connexion_home:
-    path: /connexion/home/{id}
-    methods: [ "GET", "POST" ]
-    controller: App\Controller\ConnexionController::home

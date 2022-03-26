@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Rent;
+use App\Entity\User;
 use App\Form\LocationType;
+use App\Form\SignatureLocataire;
+use App\Form\SignatureMandataire;
 use App\Repository\RentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,14 +25,46 @@ class LocationController extends AbstractController
         ]);
     }
 
-
-    #[Route('/{id}', name: 'app_location_show', methods: ['GET'])]
-    public function show(Rent $location): Response
+    #[Route('/{id}/newSM', name: 'app_location_newSM', methods: ['GET', 'POST'])]
+    public function newSM(Request $request, EntityManagerInterface $entityManager, RentRepository $locationRepository): Response
     {
-        return $this->render('location/show.html.twig', [
+        $location = new Rent();
+        $form = $this->createForm(SignatureMandataire::class, $location);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($location);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('location/signman.html.twig', [
             'location' => $location,
+            'form' => $form,
         ]);
     }
+
+    #[Route('/{id}/newSL', name: 'app_location_newSL', methods: ['GET', 'POST'])]
+    public function newSL(Request $request, EntityManagerInterface $entityManager, RentRepository $locationRepository): Response
+    {
+        $location = new Rent();
+        $form = $this->createForm(SignatureLocataire::class, $location);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($location);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('location/signloc.html.twig', [
+            'location' => $location,
+            'form' => $form,
+        ]);
+    }
+
 
     #[Route('/{id}/edit', name: 'app_location_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Rent $location, EntityManagerInterface $entityManager): Response
@@ -47,16 +82,5 @@ class LocationController extends AbstractController
             'location' => $location,
             'form' => $form,
         ]);
-    }
-
-    #[Route('/{id}', name: 'app_location_delete', methods: ['POST'])]
-    public function delete(Request $request, Rent $location, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $location->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($location);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
     }
 }

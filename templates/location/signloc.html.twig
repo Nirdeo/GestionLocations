@@ -9,11 +9,20 @@
         <div class="row">
             <div class="col-md-6">
                 <img src="{{ asset('assets/img/pexels-1571460_bm.png') }}">
+                <p><strong>Therasa A. White</strong> a signé le 12/11/2021.</p>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Commentaire du locataire :</h4>
+                        <p class="card-text">Il manque 3 verres. Une ampoule dans le salon le fonctionne pas.</p>
+                    </div>
+                </div>
             </div>
             <div class="col-md-6">
                 <h1>Résidence Saint-Vincent</h1>
                 <p>Locataire : <strong>Therasa A. White</strong></p>
                 <p><a class="text-red" href="#">Télécharger</a> le gabarit</p>
+                {{ form_start(form) }}
+                {{ form_end(form) }}
             </div>
         </div>
         <div class="row">
