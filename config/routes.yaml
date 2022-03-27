@@ -87,3 +87,13 @@ app_mandataire_edit:
   controller: App\Controller\MandataireController::edit
   requirements:
     id: '\d+'
+
+app_logout:
+    path: /connexion
+    methods: [ "GET" ]
+    controller: App\Controller\SecurityController::logout
+  
+app_login:
+    path: /deconnexion
+    methods: [ "GET", "POST" ]
+    controller: App\Controller\SecurityController::login
