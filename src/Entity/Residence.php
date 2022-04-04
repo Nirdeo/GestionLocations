@@ -34,6 +34,9 @@ class Residence
     #[ORM\Column(type: 'string', length: 255)]
     private $inventoryFile;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $picture;
+
     #[ORM\OneToMany(mappedBy: 'residence', targetEntity: Rent::class)]
     private $residences;
 
@@ -123,6 +126,18 @@ class Residence
     public function setInventoryFile(string $inventoryFile): self
     {
         $this->inventoryFile = $inventoryFile;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

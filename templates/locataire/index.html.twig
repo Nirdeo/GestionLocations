@@ -21,15 +21,14 @@
                     </thead>
                     <tbody>
                     {% for locataire in locataires %}
-                        {% if locataire.roles == ["ROLE_TENANT","ROLE_USER"]  %}
+                        {% if locataire.roles == ["ROLE_TENANT"]  %}
                             <tr>
                                 <td><strong>{{ locataire.id }}</strong></td>
                                 <td>{{ locataire.lastName }}</td>
                                 <td>{{ locataire.firstName }}</td>
                                 <td>{{ locataire.rents.count }}</td>
                                 <td>
-                                    <a href="{{ path('app_locataire_edit', {'id': locataire.id}) }}" type="button"
-                                       class="btn btn-secondary">Mettre à jour les données</a>
+                                    <a href="{{ path('app_locataire_edit', {'id': locataire.id}) }}" type="button" class="btn btn-secondary">Mettre à jour les données</a>
                                 </td>
                             </tr>
                         {% endif %}

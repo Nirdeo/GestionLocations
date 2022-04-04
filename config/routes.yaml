@@ -9,17 +9,19 @@ kernel:
 index:
   path: /
   methods: [ "GET" ]
-  controller: App\Controller\DefaultController::index
+  controller: App\Controller\RedirectController::index
 
-locations:
+app_locations_index:
   path: /locations
   methods: [ "GET" ]
   controller: App\Controller\LocationController::index
 
-locations_update:
-  path: /locations/update/
+app_locations_edit:
+  path: /locations/{id}/edit
   methods: [ "GET", "POST" ]
   controller: App\Controller\LocationController::edit
+  requirements:
+    id: '\d+'
 
 app_locataire_index:
   path: /locataire/
@@ -89,11 +91,28 @@ app_mandataire_edit:
     id: '\d+'
 
 app_logout:
-    path: /connexion
-    methods: [ "GET" ]
-    controller: App\Controller\SecurityController::logout
-  
+  path: /deconnexion
+  methods: [ "GET" ]
+  controller: App\Controller\SecurityController::logout
+
 app_login:
-    path: /deconnexion
-    methods: [ "GET", "POST" ]
-    controller: App\Controller\SecurityController::login
+  path: /connexion
+  methods: [ "GET", "POST" ]
+  controller: App\Controller\SecurityController::login
+
+app_home:
+  path: /accueil
+  methods: [ "GET" ]
+  controller: App\Controller\HomeController::index
+
+app_bien_index:
+  path: /bien/
+  methods: [ "GET" ]
+  controller: App\Controller\BienController::index
+
+app_bien_edit:
+  path: /bien/{id}/edit
+  methods: [ "GET", "POST" ]
+  controller: App\Controller\BienController::edit
+  requirements:
+    id: '\d+'

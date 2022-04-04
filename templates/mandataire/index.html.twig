@@ -21,7 +21,7 @@
                     </thead>
                     <tbody>
                     {% for mandataire in mandataires %}
-                        {% if mandataire.roles == ["ROLE_REPRESENTATIVE","ROLE_USER"]  %}
+                        {% if mandataire.roles == ["ROLE_REPRESENTATIVE"]  %}
                             <tr>
                                 <td><strong>{{ mandataire.id }}</strong></td>
                                 <td>{{ mandataire.lastName }}</td>

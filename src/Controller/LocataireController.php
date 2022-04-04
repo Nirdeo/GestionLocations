@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/locataire')]
 class LocataireController extends AbstractController
 {
-    #[Route('/', name: 'locataire', methods: ['GET'])]
+    #[Route('/', name: 'app_locataire_index', methods: ['GET'])]
     public function index(UserRepository $locataireRepository): Response
     {
         return $this->render('locataire/index.html.twig', [

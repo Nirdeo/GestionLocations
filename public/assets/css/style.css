@@ -2,6 +2,22 @@ body {
     font-family: "Lato", sans-serif;
 }
 
+.pl {
+    list-style: none;
+}
+
+.pl li::before {
+    content: "\003E";
+}
+
+form > a {
+    color:  #000000;
+}
+
+li > a {
+    color:  #000000;
+}
+
 h1 {
     color: #9f5540;
 }
