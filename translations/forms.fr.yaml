@@ -4,12 +4,15 @@ Repeat Password: Répéter le mot de passe
 First name: Prénom
 Last name: Nom
 Residence: Résidence
-Arrival date : Date d'arrivée
-Departure date: Date de départ
-Representative signature: Signature du représentant
-Representative comments: Commentaires du représentant
-Tenant signature: Signature du locataire
-Tenant comments: Commentaires du locataire
+Arrival date: Date d'arrivée
+First representative signature: Première signature du représentant
+First representative comments: Premier commentaire du représentant
+Second representative signature: Première signature du représentant
+Second representative comments: Premier commentaire du représentant
+First tenant signature: Seconde signature du locataire
+First tenant comments: Second commentaire du locataire
+Second tenant signature: Seconde signature du locataire
+Second tenant comments: Second commentaire du locataire
 Name: Nom
 Address: Adresse
 Zip code: Code postal

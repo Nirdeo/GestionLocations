@@ -3,10 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RentRepository::class)]
 class Rent
@@ -26,22 +23,40 @@ class Rent
     private $departureDate;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private $tenantComments;
+    private $firstTenantComments;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $tenantSignature;
+    private $firstTenantSignature;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private $tenantValidatedAt;
+    private $firstTenantValidatedAt;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private $representativeComments;
+    private $secondTenantComments;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $representativeSignature;
+    private $secondTenantSignature;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private $representativeValidatedAt;
+    private $secondTenantValidatedAt;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $firstRepresentativeComments;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $firstRepresentativeSignature;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $firstRepresentativeValidatedAt;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $secondRepresentativeComments;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $secondRepresentativeSignature;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $secondRepresentativeValidatedAt;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'rents')]
     #[ORM\JoinColumn(nullable: false)]
@@ -92,74 +107,146 @@ class Rent
         return $this;
     }
 
-    public function getTenantComments(): ?string
+    public function getFirstTenantComments(): ?string
     {
-        return $this->tenantComments;
+        return $this->firstTenantComments;
     }
 
-    public function setTenantComments(string $tenantComments): self
+    public function setFirstTenantComments(string $firstTenantComments): self
     {
-        $this->tenantComments = $tenantComments;
+        $this->firstTenantComments = $firstTenantComments;
 
         return $this;
     }
 
-    public function getTenantSignature(): ?string
+    public function getFirstTenantSignature(): ?string
     {
-        return $this->tenantSignature;
+        return $this->firstTenantSignature;
     }
 
-    public function setTenantSignature(string $tenantSignature): self
+    public function setFirstTenantSignature(string $firstTenantSignature): self
     {
-        $this->tenantSignature = $tenantSignature;
+        $this->firstTenantSignature = $firstTenantSignature;
 
         return $this;
     }
 
-    public function getTenantValidatedAt(): ?\DateTimeInterface
+    public function getFirstTenantValidatedAt(): ?\DateTimeInterface
     {
-        return $this->tenantValidatedAt;
+        return $this->firstTenantValidatedAt;
     }
 
-    public function setTenantValidatedAt(\DateTimeInterface $tenantValidatedAt): self
+    public function setFirstTenantValidatedAt(\DateTimeInterface $firstTenantValidatedAt): self
     {
-        $this->tenantValidatedAt = $tenantValidatedAt;
+        $this->firstTenantValidatedAt = $firstTenantValidatedAt;
 
         return $this;
     }
 
-    public function getRepresentativeComments(): ?string
+    public function getFirstRepresentativeComments(): ?string
     {
-        return $this->representativeComments;
+        return $this->firstRepresentativeComments;
     }
 
-    public function setRepresentativeComments(string $representativeComments): self
+    public function setFirstRepresentativeComments(string $firstRepresentativeComments): self
     {
-        $this->representativeComments = $representativeComments;
+        $this->firstRepresentativeComments = $firstRepresentativeComments;
 
         return $this;
     }
 
-    public function getRepresentativeSignature(): ?string
+    public function getFirstRepresentativeSignature(): ?string
     {
-        return $this->representativeSignature;
+        return $this->firstRepresentativeSignature;
     }
 
-    public function setRepresentativeSignature(string $representativeSignature): self
+    public function setFirstRepresentativeSignature(string $firstRepresentativeSignature): self
     {
-        $this->representativeSignature = $representativeSignature;
+        $this->firstRepresentativeSignature = $firstRepresentativeSignature;
 
         return $this;
     }
 
-    public function getRepresentativeValidatedAt(): ?\DateTimeInterface
+    public function getFirstRepresentativeValidatedAt(): ?\DateTimeInterface
     {
-        return $this->representativeValidatedAt;
+        return $this->firstRepresentativeValidatedAt;
     }
 
-    public function setRepresentativeValidatedAt(\DateTimeInterface $representativeValidatedAt): self
+    public function setFirstRepresentativeValidatedAt(\DateTimeInterface $firstRepresentativeValidatedAt): self
     {
-        $this->representativeValidatedAt = $representativeValidatedAt;
+        $this->firstRepresentativeValidatedAt = $firstRepresentativeValidatedAt;
+
+        return $this;
+    }
+
+    public function getSecondTenantComments(): ?string
+    {
+        return $this->secondTenantComments;
+    }
+
+    public function setSecondTenantComments(string $secondTenantComments): self
+    {
+        $this->secondTenantComments = $secondTenantComments;
+
+        return $this;
+    }
+
+    public function getSecondTenantSignature(): ?string
+    {
+        return $this->secondTenantSignature;
+    }
+
+    public function setSecondTenantSignature(string $secondTenantSignature): self
+    {
+        $this->secondTenantSignature = $secondTenantSignature;
+
+        return $this;
+    }
+
+    public function getSecondTenantValidatedAt(): ?\DateTimeInterface
+    {
+        return $this->secondTenantValidatedAt;
+    }
+
+    public function setSecondTenantValidatedAt(\DateTimeInterface $secondTenantValidatedAt): self
+    {
+        $this->secondTenantValidatedAt = $secondTenantValidatedAt;
+
+        return $this;
+    }
+
+    public function getSecondRepresentativeComments(): ?string
+    {
+        return $this->secondRepresentativeComments;
+    }
+
+    public function setSecondRepresentativeComments(string $secondRepresentativeComments): self
+    {
+        $this->secondRepresentativeComments = $secondRepresentativeComments;
+
+        return $this;
+    }
+
+    public function getSecondRepresentativeSignature(): ?string
+    {
+        return $this->secondRepresentativeSignature;
+    }
+
+    public function setSecondRepresentativeSignature(string $secondRepresentativeSignature): self
+    {
+        $this->secondRepresentativeSignature = $secondRepresentativeSignature;
+
+        return $this;
+    }
+
+    public function getSecondRepresentativeValidatedAt(): ?\DateTimeInterface
+    {
+        return $this->secondRepresentativeValidatedAt;
+    }
+
+    public function setSecondRepresentativeValidatedAt(\DateTimeInterface $secondRepresentativeValidatedAt): self
+    {
+        $this->secondRepresentativeValidatedAt = $secondRepresentativeValidatedAt;
 
         return $this;
     }

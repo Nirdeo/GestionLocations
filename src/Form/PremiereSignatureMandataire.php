@@ -10,13 +10,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SignatureLocataire extends AbstractType
+class PremiereSignatureMandataire extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('tenantSignature', TextType::class)
-            ->add('tenantComments', TextareaType::class)
+            ->add('firstRepresentativeSignature', TextType::class)
+            ->add('firstRepresentativeComments', TextareaType::class)
             ->add('submit', SubmitType::class, [
                 'label' => 'Signer',
                 'attr' => ['class' => 'btn-green'],

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Bien{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un bien</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_bien_index') }}">Retour à la liste</a>
+{% endblock %}

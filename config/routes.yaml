@@ -16,13 +16,6 @@ app_locations_index:
   methods: [ "GET" ]
   controller: App\Controller\LocationController::index
 
-app_locations_edit:
-  path: /locations/{id}/edit
-  methods: [ "GET", "POST" ]
-  controller: App\Controller\LocationController::edit
-  requirements:
-    id: '\d+'
-
 app_locataire_index:
   path: /locataire/
   methods: [ "GET" ]
@@ -70,13 +63,6 @@ app_location_newSL:
   path: /location/{id}/newSL
   methods: [ "GET", "POST" ]
   controller: App\Controller\LocationController::newSL
-
-app_location_edit:
-  path: /location/{id}/edit
-  methods: [ "GET", "POST" ]
-  controller: App\Controller\LocationController::edit
-  requirements:
-    id: '\d+'
 
 app_mandataire_index:
   path: /mandataire/
