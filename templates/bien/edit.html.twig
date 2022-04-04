@@ -8,24 +8,45 @@
 {% block body %}
     <div class="container mt-4">
         <div class="row">
-            <div class="col-md-6">
-                {{ form_start(form) }}
-                {{ form_row(form.name) }}
-                {{ form_row(form.address) }}
-                <div class="row">
-                    <div class="col-md-6">
-                    {{ form_row(form.zipCode) }}
+            {% if app.user.roles == ["ROLE_OWNER"] %}
+                <div class="col-md-6">
+                    {{ form_start(form) }}
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.address) }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.zipCode) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.city) }}
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                    {{ form_row(form.city) }}
-                    </div>
+                    {{ form_row(form.country) }}
+                    {{ form_row(form.inventoryFile) }}
+                    {{ form_row(form.picture) }}
+                    {{ form_row(form.submit) }}
+                    {{ form_end(form) }}
                 </div>
-                {{ form_row(form.country) }}
-                {{ form_row(form.inventoryFile) }}
-                {{ form_row(form.picture) }}
-                {{ form_row(form.submit) }}
-                {{ form_end(form) }}
-            </div>
+            {% elseif app.user.roles == ["ROLE_REPRESENTATIVE"] %}
+                <div class="col-md-6">
+                    {{ form_start(form) }}
+                    {{ form_row(form.name, {'disabled': 'true'}) }}
+                    {{ form_row(form.address, {'disabled': 'true'}) }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.zipCode, {'disabled': 'true'}) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.city, {'disabled': 'true'}) }}
+                        </div>
+                    </div>
+                    {{ form_row(form.country, {'disabled': 'true'}) }}
+                    {{ form_row(form.inventoryFile, {'disabled': 'true'}) }}
+                    {{ form_row(form.picture, {'disabled': 'true'}) }}
+                    {{ form_row(form.submit, {'disabled': 'true'}) }}
+                    {{ form_end(form) }}
+                </div>
+            {% endif %}
             <div class="col-md-6">
                 <h1>Résidence Saint-Vincent</h1>
                 <button type="button" class="btn btn-secondary">Disponible à la location</button>

@@ -38,6 +38,32 @@ class BienController extends AbstractController
             $entityManager->persist($bien);
             $entityManager->flush();
 
+            /** @var UploadedFile $uploadedFile1 */
+            /** @var UploadedFile $uploadedFile2 */
+            $uploadedFile1 = $form['inventoryFile']->getData();
+            $uploadedFile2 = $form['picture']->getData();
+            $destination = $this->getParameter('kernel.project_dir') . '/public/assets/uploads';
+
+            $originalFilename1 = pathinfo($uploadedFile1->getClientOriginalName(), PATHINFO_FILENAME);
+            $originalFilename2 = pathinfo($uploadedFile2->getClientOriginalName(), PATHINFO_FILENAME);
+
+            $newFilename1 = $originalFilename1 . '-' . uniqid() . '.' . $uploadedFile1->guessExtension();
+            $newFilename2 = $originalFilename2 . '-' . uniqid() . '.' . $uploadedFile2->guessExtension();
+
+            $uploadedFile1->move(
+                $destination,
+                $newFilename1
+            );
+
+            $uploadedFile2->move(
+                $destination,
+                $newFilename2
+            );
+
+            $bien->setInventoryFile($newFilename1);
+
+            $bien->setPicture($newFilename2);
+
             return $this->redirectToRoute('app_bien_index', [], Response::HTTP_SEE_OTHER);
         }
 
