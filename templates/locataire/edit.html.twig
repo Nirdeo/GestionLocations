@@ -19,7 +19,7 @@
                 {{ form_end(form) }}
             </div>
             <div class="col-md-6">
-                <h1>Liste des locations <a href="{{ path('app_locataire_new', {'id': locataire.id}) }}" type="button" class="btn btn-green">Ajouter une location</a></h1>
+                <h1>Liste des locations <a href="{{ path('app_location_new', {'id': locataire.id}) }}" type="button" class="btn btn-green">Ajouter une location</a></h1>
                 {% for location in locations %}
                         <div class="row">
                             <div class="col-md-6">

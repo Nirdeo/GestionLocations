@@ -26,37 +26,6 @@ class LocataireController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/new', name: 'app_locataire_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, User $locataire, EntityManagerInterface $entityManager, RentRepository $locationRepository): Response
-    {
-        $location = new Rent();
-        $location->setTenant($locataire);
-        $form = $this->createForm(LocationType::class, $location);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($location);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_locataire_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('locataire/new.html.twig', [
-            'locataire' => $locataire,
-            'location' => $location,
-            'form' => $form,
-            'locations' => $locationRepository->findBy(['tenant' => $locataire]),
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_locataire_show', methods: ['GET'])]
-    public function show(User $locataire): Response
-    {
-        return $this->render('locataire/show.html.twig', [
-            'locataire' => $locataire,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_locataire_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $locataire, EntityManagerInterface $entityManager, RentRepository $locationRepository, UserPasswordHasherInterface $locatairePasswordHasher): Response
     {
@@ -73,6 +42,8 @@ class LocataireController extends AbstractController
             );
             $entityManager->flush();
 
+            $this->addFlash('success', 'Votre profil a bien été modifié.');
+
             return $this->redirectToRoute('app_locataire_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -81,16 +52,5 @@ class LocataireController extends AbstractController
             'form' => $form,
             'locations' => $locationRepository->findBy(['tenant' => $locataire])
         ]);
-    }
-
-    #[Route('/{id}', name: 'app_locataire_delete', methods: ['POST'])]
-    public function delete(Request $request, User $locataire, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $locataire->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($locataire);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_locataire_index', [], Response::HTTP_SEE_OTHER);
     }
 }

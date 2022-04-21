@@ -2,11 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Rent;
 use App\Entity\User;
 use App\Form\MandataireType;
-use App\Form\LocationType;
-use App\Form\UserType;
 use App\Repository\RentRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;

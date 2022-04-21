@@ -3,29 +3,68 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-red">
         <div class="container-fluid">
             <button class="btn btn-secondary">Logo</button>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                    aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item" id="nav-accueil">
-                        <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
-                    </li>
-                    <li class="nav-item" id="nav-biens">
-                        <a class="nav-link" href="{{ path('app_bien_index') }}">Biens</a>
-                    </li>
-                    <li class="nav-item" id="nav-locataires">
-                        <a class="nav-link" href="{{ path('app_locataire_index') }}">Locataires</a>
-                    </li>
-                    <li class="nav-item" id="nav-mandataires">
-                        <a class="nav-link" href="{{ path('app_mandataire_index') }}">Mandataires</a>
-                    </li>
-                    <li class="nav-item" id="nav-profile">
-                        <a class="nav-link" href="#"><i class="fa-solid fa-circle-user"></i> Mon profil</a>
-                    </li>
-                    <li class="nav-item" id="nav-logout">
-                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
-                    </li>
+                    {% if is_granted('ROLE_OWNER') %}
+                        <li class="nav-item" id="nav-accueil">
+                            <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
+                        </li>
+                        <li class="nav-item" id="nav-biens">
+                            <a class="nav-link" href="{{ path('app_bien_index') }}">Biens</a>
+                        </li>
+                        <li class="nav-item" id="nav-locataires">
+                            <a class="nav-link" href="{{ path('app_locataire_index') }}">Locataires</a>
+                        </li>
+                        <li class="nav-item" id="nav-Locations">
+                            <a class="nav-link" href="{{ path('app_location_index') }}">Locations</a>
+                        </li>
+                        <li class="nav-item" id="nav-mandataires">
+                            <a class="nav-link" href="{{ path('app_mandataire_index') }}">Mandataires</a>
+                        </li>
+                        <li class="nav-item" id="nav-profile">
+                            <a class="nav-link" href="#"><i class="fa-solid fa-circle-user"></i> Mon profil</a>
+                        </li>
+                        <li class="nav-item" id="nav-logout">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                        </li>
+                    {% elseif is_granted('ROLE_REPRESENTATIVE') %}
+                        <li class="nav-item" id="nav-accueil">
+                            <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
+                        </li>
+                        <li class="nav-item" id="nav-biens">
+                            <a class="nav-link" href="{{ path('app_bien_index') }}">Biens</a>
+                        </li>
+                        <li class="nav-item" id="nav-Locations">
+                            <a class="nav-link" href="{{ path('app_location_index') }}">Locations</a>
+                        </li>
+                        <li class="nav-item" id="nav-profile">
+                            <a class="nav-link" href="#"><i class="fa-solid fa-circle-user"></i> Mon profil</a>
+                        </li>
+                        <li class="nav-item" id="nav-logout">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                        </li>
+                    {% elseif is_granted('ROLE_TENANT') %}
+                        <li class="nav-item" id="nav-accueil">
+                            <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
+                        </li>
+                        <li class="nav-item" id="nav-Locations">
+                            <a class="nav-link" href="{{ path('app_location_index') }}">Locations</a>
+                        </li>
+                        <li class="nav-item" id="nav-profile">
+                            <a class="nav-link" href="#"><i class="fa-solid fa-circle-user"></i> Mon profil</a>
+                        </li>
+                        <li class="nav-item" id="nav-logout">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item" id="nav-accueil">
+                            <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
