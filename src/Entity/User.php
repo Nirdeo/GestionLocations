@@ -50,11 +50,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'representative', targetEntity: Residence::class)]
     private $representatives;
 
+    #[ORM\OneToMany(mappedBy: 'address', targetEntity: Address::class)]
+    private $addresses;
+
     public function __construct()
     {
         $this->rents = new ArrayCollection();
         $this->owners = new ArrayCollection();
         $this->representatives = new ArrayCollection();
+        $this->addresses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -263,5 +267,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function isVerified(): bool
     {
         return $this->isVerified;
+    }
+
+    /**
+     * @return Collection|Address[]
+     */
+    public function getAddresses(): Collection
+    {
+        return $this->addresses;
+    }
+
+    public function addAddress(Address $address): self
+    {
+        if (!$this->addresses->contains($address)) {
+            $this->addresses[] = $address;
+            $address->setAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAddress(Address $address): self
+    {
+        if ($this->addresses->removeElement($address)) {
+            // set the owning side to null (unless already changed)
+            if ($address->getAddress() === $this) {
+                $address->setAddress(null);
+            }
+        }
+
+        return $this;
     }
 }

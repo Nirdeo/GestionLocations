@@ -19,10 +19,6 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 #[Route('/bien')]
 class BienController extends AbstractController
 {
-
-    public function __construct(private string $kernelProjectDir)
-    {
-    }
     #[Route('/', name: 'app_bien_index', methods: ['GET'])]
     public function index(RentRepository $locationRepository, Request $request): Response
     {
@@ -60,7 +56,7 @@ class BienController extends AbstractController
 
                 try {
                     $inventoryFile->move(
-                        $this->kernelProjectDir . '/public/uploads',
+                        $this->getParameter('kernel.project_dir') . '/public/uploads',
                         $newFilename
                     );
                 } catch (FileException $e) {
@@ -76,7 +72,7 @@ class BienController extends AbstractController
 
                 try {
                     $picture->move(
-                        $this->kernelProjectDir . '/public/uploads',
+                        $this->getParameter('kernel.project_dir') . '/public/uploads',
                         $newFilename
                     );
                 } catch (FileException $e) {
@@ -120,11 +116,11 @@ class BienController extends AbstractController
             $inventoryFile = $form['inventoryFile']->getData();
             $picture = $form['picture']->getData();
 
-            if ($inventoryFile){
-                $destination = $this->kernelProjectDir.'/public/uploads';
+            if ($inventoryFile) {
+                $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
 
                 $originalFilename = pathinfo($inventoryFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$inventoryFile->guessExtension();
+                $newFilename = Urlizer::urlize($originalFilename) . '-' . uniqid() . '.' . $inventoryFile->guessExtension();
 
                 $inventoryFile->move(
                     $destination,
@@ -133,11 +129,11 @@ class BienController extends AbstractController
                 $bien->setInventoryFile($newFilename);
             }
 
-            if ($picture){
-                $destination = $this->kernelProjectDir.'/public/uploads';
+            if ($picture) {
+                $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
 
                 $originalFilename = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
-                $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$picture->guessExtension();
+                $newFilename = Urlizer::urlize($originalFilename) . '-' . uniqid() . '.' . $picture->guessExtension();
 
                 $picture->move(
                     $destination,

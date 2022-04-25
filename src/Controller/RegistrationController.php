@@ -90,7 +90,6 @@ class RegistrationController extends AbstractController
             $this->addFlash('success', 'Un email de confirmation du compte contenant les identifiants a été envoyé.');
             return $this->redirectToRoute('app_home');
 
-
         }
 
         return $this->render('registration/register.html.twig', [

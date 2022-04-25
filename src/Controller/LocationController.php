@@ -32,14 +32,6 @@ class LocationController extends AbstractController
         ]);
     }
 
-    #[Route('/show', name: 'app_location_show', methods: ['GET'])]
-    public function show(RentRepository $locationRepository): Response
-    {
-        return $this->render('location/show.html.twig', [
-            'locations' => $locationRepository->findAll(),
-        ]);
-    }
-
     #[Route('/{id}/new', name: 'app_location_new', methods: ['GET', 'POST'])]
     public function new(Request $request, User $locataire, EntityManagerInterface $entityManager, RentRepository $locationRepository): Response
     {
@@ -63,49 +55,16 @@ class LocationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/newSM', name: 'app_location_newSM', methods: ['GET', 'POST'])]
-    public function newSM(Request $request, EntityManagerInterface $entityManager, RentRepository $locationRepository): Response
+    #[Route('/show', name: 'app_location_show', methods: ['GET'])]
+    public function show(RentRepository $locationRepository): Response
     {
-        $location = new Rent();
-        $form = $this->createForm(PremiereSignatureMandataire::class, $location);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($location);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('location/signman.html.twig', [
-            'location' => $location,
-            'form' => $form,
+        return $this->render('location/show.html.twig', [
+            'locations' => $locationRepository->findAll(),
         ]);
     }
 
-    #[Route('/{id}/newSL', name: 'app_location_newSL', methods: ['GET', 'POST'])]
-    public function newSL(Request $request, EntityManagerInterface $entityManager, RentRepository $locationRepository): Response
-    {
-        $location = new Rent();
-        $form = $this->createForm(PremiereSignatureLocataire::class, $location);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($location);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('location/signloc.html.twig', [
-            'location' => $location,
-            'form' => $form,
-        ]);
-    }
-
-
-    #[Route('/{id}/editSM', name: 'app_location_editSM', methods: ['GET', 'POST'])]
-    public function editSM(Request $request, Rent $location, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/editPSM', name: 'app_location_editSM', methods: ['GET', 'POST'])]
+    public function editPSM(Request $request, Rent $location, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PremiereSignatureMandataire::class, $location);
         $form->handleRequest($request);
@@ -122,8 +81,44 @@ class LocationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/editSL', name: 'app_location_editSL', methods: ['GET', 'POST'])]
-    public function editSL(Request $request, Rent $location, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/editSSM', name: 'app_location_editSM', methods: ['GET', 'POST'])]
+    public function editSSM(Request $request, Rent $location, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(PremiereSignatureMandataire::class, $location);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('location/edit.html.twig', [
+            'location' => $location,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/editPSL', name: 'app_location_editSL', methods: ['GET', 'POST'])]
+    public function editPSL(Request $request, Rent $location, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(PremiereSignatureLocataire::class, $location);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('location/edit.html.twig', [
+            'location' => $location,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/editSSL', name: 'app_location_editSL', methods: ['GET', 'POST'])]
+    public function editSSL(Request $request, Rent $location, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PremiereSignatureLocataire::class, $location);
         $form->handleRequest($request);

@@ -29,10 +29,9 @@
                                 <td>{{ locataire.lastName }}</td>
                                 <td>{{ locataire.firstName }}</td>
                                 <td>{{ locataire.rents.count }}</td>
-                                <td>
-                                    <a href="{{ path('app_locataire_edit', {'id': locataire.id}) }}" type="button"
-                                       class="btn btn-secondary">Mettre à jour les données</a>
-                                </td>
+                                <td><a href="{{ path('app_address_new', {'id': locataire.id}) }}" type="button" class="btn btn-green">Ajouter une adresse</a></td>
+                                <td><a href="{{ path('app_address_edit', {'id': locataire.id}) }}" type="button" class="btn btn-green">Modifier l'adresse</a></td>
+                                <td><a href="{{ path('app_locataire_edit', {'id': locataire.id}) }}" type="button" class="btn btn-secondary">Mettre à jour les données</a></td>
                             </tr>
                         {% endif %}
                     {% endfor %}
