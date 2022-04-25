@@ -24,28 +24,6 @@ class MandataireController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_mandataire_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
-    {
-        $mandataire = new User();
-        $form = $this->createForm(MandataireType::class, $mandataire);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $password = $passwordHasher->hashPassword($mandataire, $mandataire->getPassword());
-            $mandataire->setPassword($password);
-            $entityManager->persist($mandataire);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_mandataire_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('mandataire/new.html.twig', [
-            'mandataire' => $mandataire,
-            'form' => $form,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_mandataire_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $mandataire, EntityManagerInterface $entityManager, RentRepository $locationRepository, UserPasswordHasherInterface $mandatairePasswordHasher): Response
     {
@@ -62,13 +40,14 @@ class MandataireController extends AbstractController
             );
             $entityManager->flush();
 
+            $this->addFlash('success', 'Le profil a bien été modifié.');
+
             return $this->redirectToRoute('app_mandataire_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('mandataire/edit.html.twig', [
             'mandataire' => $mandataire,
             'form' => $form,
-            'locations' => $locationRepository->findBy(['tenant' => $mandataire])
         ]);
     }
 }

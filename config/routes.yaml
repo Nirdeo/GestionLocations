@@ -84,15 +84,3 @@ app_home:
   path: /accueil
   methods: [ "GET" ]
   controller: App\Controller\HomeController::index
-
-app_bien_index:
-  path: /bien/
-  methods: [ "GET" ]
-  controller: App\Controller\BienController::index
-
-app_bien_edit:
-  path: /bien/{id}/edit
-  methods: [ "GET", "POST" ]
-  controller: App\Controller\BienController::edit
-  requirements:
-    id: '\d+'

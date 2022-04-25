@@ -2,13 +2,15 @@
 
 {% block title %}Gestion des locataires{% endblock %}
 
-{% block assets %}<script src={{ asset("assets/js/locataire.js") }}></script>{% endblock %}
+{% block assets %}
+    <script src={{ asset("assets/js/locataire.js") }}></script>{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-12">
-                <h1>Gestion des locataires <a type="button" class="btn btn-green" href="{{ path('app_register') }}">Nouveau locataire</a></h1>
+                <h1>Gestion des locataires <a type="button" class="btn btn-green" href="{{ path('app_register') }}">Nouveau
+                        locataire</a></h1>
                 <table id="myTable" class="table table-striped" style="width:100%">
                     <thead>
                     <tr>
@@ -21,14 +23,15 @@
                     </thead>
                     <tbody>
                     {% for locataire in locataires %}
-                        {% if locataire.roles == ["ROLE_TENANT"]  %}
+                        {% if locataire.roles == ["ROLE_TENANT"] %}
                             <tr>
                                 <td><strong>{{ locataire.id }}</strong></td>
                                 <td>{{ locataire.lastName }}</td>
                                 <td>{{ locataire.firstName }}</td>
                                 <td>{{ locataire.rents.count }}</td>
                                 <td>
-                                    <a href="{{ path('app_locataire_edit', {'id': locataire.id}) }}" type="button" class="btn btn-secondary">Mettre à jour les données</a>
+                                    <a href="{{ path('app_locataire_edit', {'id': locataire.id}) }}" type="button"
+                                       class="btn btn-secondary">Mettre à jour les données</a>
                                 </td>
                             </tr>
                         {% endif %}

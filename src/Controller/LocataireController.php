@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Rent;
 use App\Entity\User;
 use App\Form\LocataireType;
-use App\Form\LocationType;
 use App\Repository\RentRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,7 +40,7 @@ class LocataireController extends AbstractController
             );
             $entityManager->flush();
 
-            $this->addFlash('success', 'Votre profil a bien été modifié.');
+            $this->addFlash('success', 'Le profil a bien été modifié.');
 
             return $this->redirectToRoute('app_locataire_index', [], Response::HTTP_SEE_OTHER);
         }

@@ -5,10 +5,10 @@ First name: Prénom
 Last name: Nom
 Residence: Résidence
 Arrival date: Date d'arrivée
-First representative signature: Première signature du représentant
-First representative comments: Premier commentaire du représentant
-Second representative signature: Première signature du représentant
-Second representative comments: Premier commentaire du représentant
+First representative signature: Première signature du mandataire
+First representative comments: Premier commentaire du mandataire
+Second representative signature: Première signature du mandataire
+Second representative comments: Premier commentaire du mandataire
 First tenant signature: Seconde signature du locataire
 First tenant comments: Second commentaire du locataire
 Second tenant signature: Seconde signature du locataire
@@ -17,6 +17,8 @@ Name: Nom
 Address: Adresse
 Zip code: Code postal
 City: Ville
+Tenant: Locataire
+Representative: Mandataire
 Country: Pays
 Inventory file: Gabarit inventaire
 Picture: Photo

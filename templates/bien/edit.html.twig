@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Locataires - Modification{% endblock %}
+{% block title %}Biens - Modification{% endblock %}
 
 {% block assets %}
     <script src={{ asset("assets/js/bien.js") }}></script>{% endblock %}
@@ -51,7 +51,7 @@
                 <h1>Résidence Saint-Vincent</h1>
                 <button type="button" class="btn btn-secondary">Disponible à la location</button>
                 <button type="button" class="btn btn-success">Ajouter une location</button>
-                <h1>3 Locations</h1>
+                <h1>{{ bien.residences.count }} Locations</h1>
                 <table id="myTable" class="table table-striped" style="width:100%">
                     <thead>
                     <tr>
