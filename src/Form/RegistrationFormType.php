@@ -26,16 +26,8 @@ class RegistrationFormType extends AbstractType
                 'label' => 'S\'inscrire',
                 'attr' => ['class' => 'btn-green'],
             ])
-            // choicetype field for choose roles between tenant and representative
-            ->add('roles', ChoiceType::class, [
-                'required' => true,
-                'multiple' => false,
-                'expanded' => false,
-                'choices' => [
-                    'Locataire' => 'ROLE_TENANT',
-                    'Mandataire' => 'ROLE_REPRESENTATIVE',
-                ],
-            ])
+
+
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -45,17 +37,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ]);
 
-        $builder->get('roles')
-            ->addModelTransformer(new CallbackTransformer(
-                function ($rolesArray) {
-                    // transform the array to a string
-                    return count($rolesArray) ? $rolesArray[0] : null;
-                },
-                function ($rolesString) {
-                    // transform the string back to an array
-                    return [$rolesString];
-                }
-            ));
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

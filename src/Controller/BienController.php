@@ -9,6 +9,7 @@ use App\Form\BienType;
 use App\Repository\RentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Gedmo\Sluggable\Util\Urlizer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,7 @@ class BienController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_OWNER')]
     #[Route('/new', name: 'app_bien_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
@@ -95,6 +97,7 @@ class BienController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_REPRESENTATIVE')]
     #[Route('/{id}', name: 'app_bien_show', methods: ['GET'])]
     public function show(Residence $bien, RentRepository $locationRepository): Response
     {
@@ -104,6 +107,7 @@ class BienController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_OWNER')]
     #[Route('/{id}/edit', name: 'app_bien_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Residence $bien, RentRepository $locationRepository, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {

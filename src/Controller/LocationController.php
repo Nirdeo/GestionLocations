@@ -32,6 +32,15 @@ class LocationController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}', name: 'app_location_show', methods: ['GET'])]
+    public function show(RentRepository $locationRepository, Rent $location): Response
+    {
+        return $this->render('location/show.html.twig', [
+            'locations' => $locationRepository->findAll(),
+            'location' => $location,
+        ]);
+    }
+
     #[Route('/{id}/new', name: 'app_location_new', methods: ['GET', 'POST'])]
     public function new(Request $request, User $locataire, EntityManagerInterface $entityManager, RentRepository $locationRepository): Response
     {
@@ -55,14 +64,6 @@ class LocationController extends AbstractController
         ]);
     }
 
-    #[Route('/show', name: 'app_location_show', methods: ['GET'])]
-    public function show(RentRepository $locationRepository): Response
-    {
-        return $this->render('location/show.html.twig', [
-            'locations' => $locationRepository->findAll(),
-        ]);
-    }
-
     #[Route('/{id}/editPSM', name: 'app_location_editSM', methods: ['GET', 'POST'])]
     public function editPSM(Request $request, Rent $location, EntityManagerInterface $entityManager): Response
     {
@@ -75,7 +76,7 @@ class LocationController extends AbstractController
             return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('location/edit.html.twig', [
+        return $this->renderForm('location/edit_psm.html.twig', [
             'location' => $location,
             'form' => $form,
         ]);
@@ -93,7 +94,7 @@ class LocationController extends AbstractController
             return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('location/edit.html.twig', [
+        return $this->renderForm('location/edit_ssm.html.twig', [
             'location' => $location,
             'form' => $form,
         ]);
@@ -111,7 +112,7 @@ class LocationController extends AbstractController
             return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('location/edit.html.twig', [
+        return $this->renderForm('location/edit_psl.html.twig', [
             'location' => $location,
             'form' => $form,
         ]);
@@ -129,7 +130,7 @@ class LocationController extends AbstractController
             return $this->redirectToRoute('app_location_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('location/edit.html.twig', [
+        return $this->renderForm('location/edit_ssl.html.twig', [
             'location' => $location,
             'form' => $form,
         ]);

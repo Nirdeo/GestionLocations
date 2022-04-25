@@ -17,8 +17,6 @@
                 {{ form_row(form.password) }}
                 {{ form_row(form.submit) }}
                 {{ form_end(form) }}
-                {{ form_start(addressForm) }}
-                {{ form_end(addressForm) }}
             </div>
             <div class="col-md-6">
                 <h1>Liste des locations <a href="{{ path('app_location_new', {'id': locataire.id}) }}" type="button"

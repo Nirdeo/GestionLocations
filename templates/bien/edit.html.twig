@@ -8,7 +8,6 @@
 {% block body %}
     <div class="container mt-4">
         <div class="row">
-            {% if app.user.roles == ["ROLE_OWNER"] %}
                 <div class="col-md-6">
                     {{ form_start(form) }}
                     {{ form_row(form.name) }}
@@ -24,33 +23,14 @@
                     {{ form_row(form.country) }}
                     {{ form_row(form.inventoryFile) }}
                     {{ form_row(form.picture) }}
+                    {{ form_row(form.representative) }}
                     {{ form_row(form.submit) }}
                     {{ form_end(form) }}
                 </div>
-            {% elseif app.user.roles == ["ROLE_REPRESENTATIVE"] %}
-                <div class="col-md-6">
-                    {{ form_start(form) }}
-                    {{ form_row(form.name, {'disabled': 'true'}) }}
-                    {{ form_row(form.address, {'disabled': 'true'}) }}
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{ form_row(form.zipCode, {'disabled': 'true'}) }}
-                        </div>
-                        <div class="col-md-6">
-                            {{ form_row(form.city, {'disabled': 'true'}) }}
-                        </div>
-                    </div>
-                    {{ form_row(form.country, {'disabled': 'true'}) }}
-                    {{ form_row(form.inventoryFile, {'disabled': 'true'}) }}
-                    {{ form_row(form.picture, {'disabled': 'true'}) }}
-                    {{ form_row(form.submit, {'disabled': 'true'}) }}
-                    {{ form_end(form) }}
-                </div>
-            {% endif %}
             <div class="col-md-6">
-                <h1>Résidence Saint-Vincent</h1>
+                <h1>{{ bien.name }} </h1>
                 <button type="button" class="btn btn-secondary">Disponible à la location</button>
-                <button type="button" class="btn btn-success">Ajouter une location</button>
+                <a href="{{ path('app_location_new', {'id': bien.id}) }}"type="button" class="btn btn-success">Ajouter une location</a>
                 <h1>{{ bien.residences.count }} Locations</h1>
                 <table id="myTable" class="table table-striped" style="width:100%">
                     <thead>
@@ -69,7 +49,7 @@
                             <td>{{ location.arrivalDate|date('d/m/Y') }}</td>
                             <td>{{ location.departureDate|date('d/m/Y') }}</td>
                             <td>{{ location.tenant.firstName }} {{ location.tenant.lastName }}</td>
-                            <td><a href="#" type="button" class="btn btn-red">Accéder</a></td>
+                            <td><a href="{{ path('app_location_show', {'id': location.id}) }}" type="button" class="btn btn-red">Accéder</a></td>
                         </tr>
                     {% else %}
                         <tr>

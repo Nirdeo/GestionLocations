@@ -40,9 +40,10 @@ security:
     - { path: ^/accueil, roles: [ ROLE_OWNER, ROLE_REPRESENTATIVE, ROLE_TENANT ] }
     - { path: ^/locataire, roles: ROLE_OWNER }
     - { path: ^/inscription, roles: ROLE_OWNER }
+    - { path: ^/inscriptionlocataire, roles: ROLE_OWNER }
+    - { path: ^/inscriptionmandataire, roles: ROLE_OWNER }
     - { path: ^/mandataire, roles: ROLE_OWNER }
     - { path: ^/bien, roles: [ ROLE_OWNER, ROLE_REPRESENTATIVE ] }
-    - { path: ^/bien/new, roles: ROLE_OWNER }
     - { path: ^/location, roles: [ ROLE_OWNER, ROLE_REPRESENTATIVE, ROLE_TENANT ] }
   access_denied_url: /connexion
 when@test:

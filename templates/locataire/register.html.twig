@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription Locataire/Mandataire{% endblock %}
+{% block title %}Inscription Locataire{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
@@ -16,7 +16,6 @@
                 {{ form_row(registrationForm.email) }}
                 {{ form_row(registrationForm.firstName) }}
                 {{ form_row(registrationForm.lastName) }}
-                {{ form_row(registrationForm.roles) }}
                 {{ form_row(registrationForm.agreeTerms) }}
                 {{ form_row(registrationForm.submit) }}
                 {{ form_end(registrationForm) }}

@@ -97,6 +97,144 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     * @throws Exception
+     */
+    #[Route('/inscriptionlocataire', name: 'app_register_locataire')]
+    public function registerlocataire(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    {
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            // $user->setPassword(
+            // $userPasswordHasher->hashPassword(
+            //         $user,
+            //         $form->get('plainPassword')->getData()
+            //     )
+            // );
+
+            // randomPassword() method
+            $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+            $pass = array(); //remember to declare $pass as an array
+            $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+            for ($i = 0; $i < 8; $i++) {
+                $n = random_int(0, $alphaLength);
+                $pass[] = $alphabet[$n];
+            }
+            $plainPassword = implode($pass); //turn the array into a string
+
+            // generate a random password using randomPassword() method and hash it for the user
+            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            $user->setRoles(['ROLE_TENANT']);
+            $user->setIsVerified(true);
+
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // generate a signed url and email it to the user
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                (new TemplatedEmail())
+                    ->from(new Address('test@gmail.com', 'Test'))
+                    ->to($user->getEmail())
+                    ->subject('Vos identifiants')
+                    ->htmlTemplate('locataire/confirmation_email.html.twig')
+                    ->context([
+                        'myemail' => $user->getEmail(),
+                        'mypassword' => $plainPassword,
+                    ])
+            );
+            // do anything else you need here, like send an email
+
+//            return $userAuthenticator->authenticateUser(
+//                $user,
+//                $authenticator,
+//                $request
+//            );
+
+            $this->addFlash('success', 'Un email de confirmation du compte contenant les identifiants a été envoyé.');
+            return $this->redirectToRoute('app_home');
+
+        }
+
+        return $this->render('locataire/register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @throws TransportExceptionInterface
+     * @throws Exception
+     */
+    #[Route('/inscriptionmandataire', name: 'app_register_mandataire')]
+    public function registermandataire(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    {
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            // $user->setPassword(
+            // $userPasswordHasher->hashPassword(
+            //         $user,
+            //         $form->get('plainPassword')->getData()
+            //     )
+            // );
+
+            // randomPassword() method
+            $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+            $pass = array(); //remember to declare $pass as an array
+            $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+            for ($i = 0; $i < 8; $i++) {
+                $n = random_int(0, $alphaLength);
+                $pass[] = $alphabet[$n];
+            }
+            $plainPassword = implode($pass); //turn the array into a string
+
+            // generate a random password using randomPassword() method and hash it for the user
+            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            $user->setRoles(['ROLE_REPRESENTATIVE']);
+            $user->setIsVerified(true);
+
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // generate a signed url and email it to the user
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                (new TemplatedEmail())
+                    ->from(new Address('test@gmail.com', 'Test'))
+                    ->to($user->getEmail())
+                    ->subject('Vos identifiants')
+                    ->htmlTemplate('mandataire/confirmation_email.html.twig')
+                    ->context([
+                        'myemail' => $user->getEmail(),
+                        'mypassword' => $plainPassword,
+                    ])
+            );
+            // do anything else you need here, like send an email
+
+//            return $userAuthenticator->authenticateUser(
+//                $user,
+//                $authenticator,
+//                $request
+//            );
+
+            $this->addFlash('success', 'Un email de confirmation du compte contenant les identifiants a été envoyé.');
+            return $this->redirectToRoute('app_home');
+
+        }
+
+        return $this->render('mandataire/register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
+
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {
@@ -116,4 +254,5 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_login');
     }
+
 }

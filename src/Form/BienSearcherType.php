@@ -17,9 +17,18 @@ class BienSearcherType extends AbstractType
         $builder
             ->add('city', ChoiceType::class, [
                 'choices' => [
-                    'Maybe' => null,
-                    'Yes' => true,
-                    'No' => false,
+                    'Paris' => 'Paris',
+                    'Lyon' => 'Lyon',
+                    'Marseille' => 'Marseille',
+                    'Toulouse' => 'Toulouse',
+                    'Nice' => 'Nice',
+                    'Nantes' => 'Nantes',
+                    'Strasbourg' => 'Strasbourg',
+                    'Montpellier' => 'Montpellier',
+                    'Bordeaux' => 'Bordeaux',
+                    'Lille' => 'Lille',
+                    'Rennes' => 'Rennes',
+                    'Reims' => 'Reims',
                 ],
             ])
             ->add('isRented', CheckboxType::class, [

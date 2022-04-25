@@ -2,7 +2,7 @@
 
 {% block title %}Gestion des locations{% endblock %}
 
-{% block assets %}<script src={{ asset("assets/js/bien.js") }}></script>{% endblock %}
+{% block assets %}<script src={{ asset("assets/js/location.js") }}></script>{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
@@ -18,8 +18,8 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <h1>Résidence Saint-Vincent</h1>
-                <p>Locataire : <strong>Therasa A. White</strong></p>
+                <h1>{{ location.residence.name }}</h1>
+                <p>Locataire : <strong>{{ location.tenant.firstName }} {{ location.tenant.lastName }}</strong></p>
                 <p><a class="text-red" href="#">Télécharger</a> le gabarit</p>
                 {{ form_start(form) }}
                 {{ form_end(form) }}
@@ -31,7 +31,7 @@
                 <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
                     <div class="card-header">Arrivée du locataire</div>
                     <div class="card-body">
-                        <h5 class="card-title">Arrivée le 12/11/2021</h5>
+                        <h5 class="card-title">Arrivée le {{ location.arrivalDate|date('d/m/Y') }}</h5>
                         <p class="card-text">Le locataire est arrivé à la résidence.</p>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
                     <div class="card-header">Signature de l’inventaire</div>
                     <div class="card-body">
-                        <h5 class="card-title">Signé le 12/11/2021</h5>
+                        <h5 class="card-title">Signé le {{ location.firstTenantValidatedAt|date('d/m/Y') }}</h5>
                         <p class="card-text">par le locataire avec un commentaire.</p>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                 <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
                     <div class="card-header">Signature de l’inventaire</div>
                     <div class="card-body">
-                        <h5 class="card-title">Signé le 13/11/2021</h5>
+                        <h5 class="card-title">Signé le {{ location.firstRepresentativeValidatedAt|date('d/m/Y') }}</h5>
                         <p class="card-text">par le mandataire sans commentaire.</p>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     <div class="card-header">Signature fin état des lieux de l’inventaire
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">A signer le 15/11/2021</h5>
+                        <h5 class="card-title">A signer le {{ location.secondTenantValidatedAt|date('d/m/Y') }}</h5>
                         <p class="card-text">par le locataire.</p>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                     <div class="card-header">Signature fin état des lieux de l’inventaire
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">A signer le 15/11/2021</h5>
+                        <h5 class="card-title">A signer le {{ location.secondRepresentativeValidatedAt|date('d/m/Y') }}</h5>
                         <p class="card-text">par le mandataire.</p>
                     </div>
                 </div>

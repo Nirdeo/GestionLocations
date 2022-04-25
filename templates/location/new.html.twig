@@ -2,7 +2,7 @@
 
 {% block title %}Locataires - Ajout d'une location{% endblock %}
 
-{% block assets %}<script src={{ asset("assets/js/locataire.js") }}></script>{% endblock %}
+{% block assets %}<script src={{ asset("assets/js/location.js") }}></script>{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
@@ -41,7 +41,7 @@
                             <td>{{ location.arrivalDate|date('d/m/Y') }}</td>
                             <td>{{ location.departureDate|date('d/m/Y') }}</td>
                             <td>{{ location.tenant.firstName }} {{ location.tenant.lastName }}</td>
-                            <td><a href="#" type="button" class="btn btn-red">Accéder</a></td>
+                            <td><a href="{{ path('app_location_show', {'id': location.id}) }}" type="button" class="btn btn-red">Accéder</a></td>
                         </tr>
                     {% else %}
                         <tr>
