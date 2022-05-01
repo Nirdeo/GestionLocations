@@ -8,7 +8,6 @@ use App\Form\LocationType;
 use App\Form\PremiereSignatureLocataire;
 use App\Form\PremiereSignatureMandataire;
 use App\Repository\RentRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

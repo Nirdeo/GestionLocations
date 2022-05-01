@@ -33,12 +33,12 @@
                         <div class="col-md-6">
 
                             <h1>{{ location.residence.name }}</h1>
-                            {% if location.arrivalDate|date('d/m/Y') < 'now'|date('d - m -Y') < location.departureDate|date('d/m/Y') %}
-                                <p>Disponible le {{ location.departureDate('d/m/Y') }}</p>
+                            {% if location.arrivalDate|date('d/m/Y') < 'now'|date('d/m/Y') < location.departureDate|date('d/m/Y') %}
+                                <p>Disponible le {{ location.departureDate|date('d/m/Y') }}</p>
                             {% else %}
                                 <p>Disponible depuis le {{ location.departureDate|date('d/m/Y') }}</p>
                             {% endif %}
-                            {% if location.arrivalDate|date('d/m/Y') < 'now'|date('d - m -Y') < location.departureDate|date('d/m/Y') %}
+                            {% if location.arrivalDate|date('d/m/Y') < 'now'|date('d/m/Y') < location.departureDate|date('d/m/Y') %}
                                 <p>Actuellement occupé</p>
                             {% else %}
                                 <p>Non occupé</p>

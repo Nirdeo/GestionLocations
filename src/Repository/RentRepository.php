@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Entity\BienSearcher;
 use App\Entity\Rent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -48,25 +47,4 @@ class RentRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findAllRentedBiens(BienSearcher $search)
-    {
-        // query qui retourne tous les biens dont la date de fin est inférieure à la date du jour
-        $query = $this->createQueryBuilder('r')
-            ->where('r.dateEnd <= :date')
-            ->setParameter('date', new \DateTime())
-            ->getQuery();
-
-        return $query->getResult();
-    }
-
-    public function findBiensByVille(BienSearcher $search)
-    {
-        // query qui retourne tous les biens selon la ville choisie
-        $query = $this->createQueryBuilder('r')
-            ->where('r.ville = :ville')
-            ->setParameter('ville', $search->getVille())
-            ->getQuery();
-
-        return $query->getResult();
-    }
 }
