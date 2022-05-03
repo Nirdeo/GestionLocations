@@ -18,20 +18,39 @@ des locataires et gestion des locations.
 
 ## Technologies utilisées
 
-Les technologies utilisées sont Symfony, Doctrine, Twig, Bootstrap, Jquery, Javascript, PHP, HTML, CSS, MySQL, Git,
-GitHub.
+    * Symfony
+    * Doctrine
+    * Twig
+    * Bootstrap
+    * jQuery
+    * FontAwesome
+    * JavaScript
+    * PHP
+    * HTML
+    * CSS
+    * SQL
+    * Git
+    * GitHub
+    * Apache
+    * MariaDB
+    * Phpmyadmin
+    * Adobe XD
+    * MySQL Workbench
+    * Visual Studio Code
+    * Phpstorm
 
 ## Installation
 
-Pour installer et utiliser le projet, il faut suivre les étapes suivantes :
+Pour installer et utiliser l'application, il faut suivre les étapes suivantes :
 
-- D'abord il faut avoir un compte GitHub et accéder au repository suivant afin de télécharger le
-  projet : [GestionLocations](https://github.com/Nirdeo/GestionLocations)
-- Puis, il faut ouvrir le projet dans le terminal et exécuter la commande suivante : `composer install`
-- Ensuite, il faut créer une base de données et un utilisateur avec les droits nécessaires pour l'utiliser.
-- Puis, il faut se connecter à la base de données et exécuter la commande
+- D'abord il faut avoir un compte GitHub et accéder au repository suivant afin de télécharger l'application : [GestionLocations](https://github.com/Nirdeo/GestionLocations)
+- Puis, il faut exécuter la commande suivante dans un terminal à la racine du projet : `composer install`
+- Ensuite, après avoir démarré le serveur Apache et le service MySQL il faut créer une base de données avec la commande
+  suivante : `php bin/console doctrine:database:create`
+- Puis, pour créer les tables de la base de données il faut exécuter la commande
   suivante : `php bin/console doctrine:schema:update --force`
-- Enfin pour démarrer le projet, il faut exécuter la commande suivante : `php bin/console server:run`
+- Et pour insérer les données de tests il faut exécuter la commande suivante : `php bin/console doctrine:fixtures:load`
+- Enfin pour démarrer l'application, il faut exécuter la commande suivante : `symfony server:start`
 - Après avoir démarré le serveur, il faut se connecter à l'adresse suivante : `http://localhost:8000`
 - Et pour finir, il faut se connecter avec les identifiants fournis afin d'accéder à l'application.
-- Pour stopper l'application, il faut exécuter la commande suivante : `php bin/console server:stop`
+- Pour stopper l'application, il faut exécuter la commande suivante : `symfony server:stop`
