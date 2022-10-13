@@ -4,7 +4,6 @@ namespace App\Entity;
 
 class BienSearcher
 {
-
     // attribut permettant de trouver les propriétés d'un objet
     // un permettant de trier les résidences par villes
     // un autre autre permettant de voir les résidences actuellement louées ou non
@@ -37,5 +36,4 @@ class BienSearcher
 
         return $this;
     }
-
 }

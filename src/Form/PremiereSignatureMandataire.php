@@ -20,7 +20,8 @@ class PremiereSignatureMandataire extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Signer',
                 'attr' => ['class' => 'btn-green'],
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

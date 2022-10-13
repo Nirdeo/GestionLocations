@@ -36,7 +36,7 @@ class BienType extends AbstractType
                             'application/x-pdf',
                         ],
                         'mimeTypesMessage' => 'Please upload a valid PDF document',
-                    ])
+                    ]),
                 ],
             ])
             ->add('picture', FileType::class, [
@@ -50,7 +50,7 @@ class BienType extends AbstractType
                             'application/x-pdf',
                         ],
                         'mimeTypesMessage' => 'Please upload a valid PDF document',
-                    ])
+                    ]),
                 ],
             ])
             ->add('representative', EntityType::class, [
@@ -60,7 +60,8 @@ class BienType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Ajouter',
                 'attr' => ['class' => 'btn-green'],
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

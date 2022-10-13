@@ -49,7 +49,8 @@ class LocationType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Ajouter',
                 'attr' => ['class' => 'btn-green'],
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -22,7 +22,7 @@ class AddressType extends AbstractType
                     new NotBlank([
                         'message' => 'Please enter an address',
                     ]),
-                ]
+                ],
             ])
             ->add('complement', TextType::class, [
                 'required' => false,
@@ -38,14 +38,14 @@ class AddressType extends AbstractType
                         'minMessage' => 'Your postal code must be {{ limit }} characters long',
                         'maxMessage' => 'Your postal code must be {{ limit }} characters long',
                     ]),
-                ]
+                ],
             ])
             ->add('city', TextType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a city',
                     ]),
-                ]
+                ],
             ])
             ->add('phone', TelType::class, [
                 'constraints' => [
@@ -58,14 +58,15 @@ class AddressType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Mettre à jour',
                 'attr' => ['class' => 'btn-green'],
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Address::class,
-            'translation_domain' => 'forms'
+            'translation_domain' => 'forms',
         ]);
     }
 }

@@ -42,8 +42,8 @@ class BienSearcherType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary btn-block',
                 ],
-            ]);
-
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -52,7 +52,7 @@ class BienSearcherType extends AbstractType
             'data_class' => BienSearcher::class,
             'translation_domain' => 'forms',
             'method' => 'GET',
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
     }
 

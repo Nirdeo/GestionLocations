@@ -1,3 +1,3 @@
 $(document).ready(function () {
-    $("#nav-locations").addClass("active")
+  $("#nav-locations").addClass("active");
 });

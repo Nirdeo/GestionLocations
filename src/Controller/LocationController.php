@@ -17,7 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/location')]
 class LocationController extends AbstractController
 {
-
     // afficher uniquement la liste des locations de l'utilisateur connecté
     #[Route('/', name: 'app_location_index', methods: ['GET'])]
     public function index(RentRepository $locationRepository): Response

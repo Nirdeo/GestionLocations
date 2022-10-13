@@ -23,8 +23,7 @@ class RegistrationFormType extends AbstractType
                 'constraints' => [
                     new Email(['message' => 'Please enter a valid email address.']),
                     new Unique(['message' => 'This email address is already in use.']),
-
-                ]
+                ],
             ])
             ->add('firstName', TextType::class)
             ->add('lastName', TextType::class)
@@ -39,9 +38,8 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
-            ]);
-
-
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

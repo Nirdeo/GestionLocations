@@ -48,7 +48,7 @@ class LocataireController extends AbstractController
         return $this->renderForm('locataire/edit.html.twig', [
             'locataire' => $locataire,
             'form' => $form,
-            'locations' => $locationRepository->findBy(['tenant' => $locataire])
+            'locations' => $locationRepository->findBy(['tenant' => $locataire]),
         ]);
     }
 }

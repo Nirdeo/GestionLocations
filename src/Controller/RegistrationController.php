@@ -51,24 +51,25 @@ class RegistrationController extends AbstractController
 
             // randomPassword() method
             $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-            $pass = array(); //remember to declare $pass as an array
-            $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-            for ($i = 0; $i < 8; $i++) {
+            $pass = []; // remember to declare $pass as an array
+            $alphaLength = strlen($alphabet) - 1; // put the length -1 in cache
+            for ($i = 0; $i < 8; ++$i) {
                 $n = random_int(0, $alphaLength);
                 $pass[] = $alphabet[$n];
             }
-            $plainPassword = implode($pass); //turn the array into a string
+            $plainPassword = implode($pass); // turn the array into a string
 
             // generate a random password using randomPassword() method and hash it for the user
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
-            //$user->setRoles(['ROLE_TENANT']);
-
+            // $user->setRoles(['ROLE_TENANT']);
 
             $entityManager->persist($user);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
                 (new TemplatedEmail())
                     ->from(new Address('test@gmail.com', 'Test'))
                     ->to($user->getEmail())
@@ -88,8 +89,8 @@ class RegistrationController extends AbstractController
 //            );
 
             $this->addFlash('success', 'Un email de confirmation du compte contenant les identifiants a été envoyé.');
-            return $this->redirectToRoute('app_home');
 
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -119,25 +120,26 @@ class RegistrationController extends AbstractController
 
             // randomPassword() method
             $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-            $pass = array(); //remember to declare $pass as an array
-            $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-            for ($i = 0; $i < 8; $i++) {
+            $pass = []; // remember to declare $pass as an array
+            $alphaLength = strlen($alphabet) - 1; // put the length -1 in cache
+            for ($i = 0; $i < 8; ++$i) {
                 $n = random_int(0, $alphaLength);
                 $pass[] = $alphabet[$n];
             }
-            $plainPassword = implode($pass); //turn the array into a string
+            $plainPassword = implode($pass); // turn the array into a string
 
             // generate a random password using randomPassword() method and hash it for the user
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
             $user->setRoles(['ROLE_TENANT']);
             $user->setIsVerified(true);
 
-
             $entityManager->persist($user);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
                 (new TemplatedEmail())
                     ->from(new Address('test@gmail.com', 'Test'))
                     ->to($user->getEmail())
@@ -157,8 +159,8 @@ class RegistrationController extends AbstractController
 //            );
 
             $this->addFlash('success', 'Un email de confirmation du compte contenant les identifiants a été envoyé.');
-            return $this->redirectToRoute('app_home');
 
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('locataire/register.html.twig', [
@@ -188,25 +190,26 @@ class RegistrationController extends AbstractController
 
             // randomPassword() method
             $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-            $pass = array(); //remember to declare $pass as an array
-            $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-            for ($i = 0; $i < 8; $i++) {
+            $pass = []; // remember to declare $pass as an array
+            $alphaLength = strlen($alphabet) - 1; // put the length -1 in cache
+            for ($i = 0; $i < 8; ++$i) {
                 $n = random_int(0, $alphaLength);
                 $pass[] = $alphabet[$n];
             }
-            $plainPassword = implode($pass); //turn the array into a string
+            $plainPassword = implode($pass); // turn the array into a string
 
             // generate a random password using randomPassword() method and hash it for the user
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
             $user->setRoles(['ROLE_REPRESENTATIVE']);
             $user->setIsVerified(true);
 
-
             $entityManager->persist($user);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
                 (new TemplatedEmail())
                     ->from(new Address('test@gmail.com', 'Test'))
                     ->to($user->getEmail())
@@ -226,8 +229,8 @@ class RegistrationController extends AbstractController
 //            );
 
             $this->addFlash('success', 'Un email de confirmation du compte contenant les identifiants a été envoyé.');
-            return $this->redirectToRoute('app_home');
 
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('mandataire/register.html.twig', [
@@ -254,5 +257,4 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_login');
     }
-
 }

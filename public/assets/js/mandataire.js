@@ -1,3 +1,3 @@
 $(document).ready(function () {
-    $("#nav-mandataires").addClass("active")
+  $("#nav-mandataires").addClass("active");
 });

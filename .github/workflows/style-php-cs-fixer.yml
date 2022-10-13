@@ -1,0 +1,2 @@
+- name: OSKAR-PHP-CS-Fixer
+  uses: OskarStark/php-cs-fixer-ga@3.12.0

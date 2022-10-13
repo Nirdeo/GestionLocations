@@ -43,7 +43,6 @@ class BienController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             // set owner to current user
             $bien->setOwner($this->getUser());
 
@@ -54,11 +53,11 @@ class BienController extends AbstractController
             if ($inventoryFile) {
                 $originalFilename = pathinfo($inventoryFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $inventoryFile->guessExtension();
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$inventoryFile->guessExtension();
 
                 try {
                     $inventoryFile->move(
-                        $this->getParameter('kernel.project_dir') . '/public/uploads',
+                        $this->getParameter('kernel.project_dir').'/public/uploads',
                         $newFilename
                     );
                 } catch (FileException $e) {
@@ -70,11 +69,11 @@ class BienController extends AbstractController
             if ($picture) {
                 $originalFilename = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $picture->guessExtension();
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$picture->guessExtension();
 
                 try {
                     $picture->move(
-                        $this->getParameter('kernel.project_dir') . '/public/uploads',
+                        $this->getParameter('kernel.project_dir').'/public/uploads',
                         $newFilename
                     );
                 } catch (FileException $e) {
@@ -83,13 +82,11 @@ class BienController extends AbstractController
                 $bien->setPicture($newFilename);
             }
 
-
             $entityManager->persist($bien);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_bien_index', [], Response::HTTP_SEE_OTHER);
         }
-
 
         return $this->renderForm('bien/new.html.twig', [
             'bien' => $bien,
@@ -115,16 +112,15 @@ class BienController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             // traitement de la modification de l'upload de inventoryFile et de picture
             $inventoryFile = $form['inventoryFile']->getData();
             $picture = $form['picture']->getData();
 
             if ($inventoryFile) {
-                $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
+                $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
 
                 $originalFilename = pathinfo($inventoryFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $newFilename = Urlizer::urlize($originalFilename) . '-' . uniqid() . '.' . $inventoryFile->guessExtension();
+                $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$inventoryFile->guessExtension();
 
                 $inventoryFile->move(
                     $destination,
@@ -134,10 +130,10 @@ class BienController extends AbstractController
             }
 
             if ($picture) {
-                $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
+                $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
 
                 $originalFilename = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
-                $newFilename = Urlizer::urlize($originalFilename) . '-' . uniqid() . '.' . $picture->guessExtension();
+                $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$picture->guessExtension();
 
                 $picture->move(
                     $destination,

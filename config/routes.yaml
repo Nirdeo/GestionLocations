@@ -8,74 +8,74 @@ kernel:
 
 index:
   path: /
-  methods: [ "GET" ]
+  methods: ["GET"]
   controller: App\Controller\RedirectController::index
 
 app_locations_index:
   path: /locations
-  methods: [ "GET" ]
+  methods: ["GET"]
   controller: App\Controller\LocationController::index
 
 app_locataire_index:
   path: /locataire/
-  methods: [ "GET" ]
+  methods: ["GET"]
   controller: App\Controller\LocataireController::index
 
 app_locataire_edit:
   path: /locataire/{id}/edit
-  methods: [ "GET", "POST" ]
+  methods: ["GET", "POST"]
   controller: App\Controller\LocataireController::edit
   requirements:
     id: '\d+'
 
 app_location_index:
   path: /location/
-  methods: [ "GET" ]
+  methods: ["GET"]
   controller: App\Controller\LocationController::index
 
 app_location_newSM:
   path: /location/{id}/newSM
-  methods: [ "GET", "POST" ]
+  methods: ["GET", "POST"]
   controller: App\Controller\LocationController::newSM
 
 app_location_newSL:
   path: /location/{id}/newSL
-  methods: [ "GET", "POST" ]
+  methods: ["GET", "POST"]
   controller: App\Controller\LocationController::newSL
 
 app_mandataire_index:
   path: /mandataire/
-  methods: [ "GET" ]
+  methods: ["GET"]
   controller: App\Controller\MandataireController::index
 
 app_mandataire_new:
   path: /mandataire/new
-  methods: [ "GET", "POST" ]
+  methods: ["GET", "POST"]
   controller: App\Controller\MandataireController::new
 
 app_mandataire_edit:
   path: /mandataire/{id}/edit
-  methods: [ "GET", "POST" ]
+  methods: ["GET", "POST"]
   controller: App\Controller\MandataireController::edit
   requirements:
     id: '\d+'
 
 app_logout:
   path: /deconnexion
-  methods: [ "GET" ]
+  methods: ["GET"]
   controller: App\Controller\SecurityController::logout
 
 app_login:
   path: /connexion
-  methods: [ "GET", "POST" ]
+  methods: ["GET", "POST"]
   controller: App\Controller\SecurityController::login
 
 app_verify_email:
   path: /verify_email
-  methods: [ "GET" ]
+  methods: ["GET"]
   controller: App\Controller\RegistrationController::verifyUserEmail
 
 app_home:
   path: /accueil
-  methods: [ "GET" ]
+  methods: ["GET"]
   controller: App\Controller\HomeController::index

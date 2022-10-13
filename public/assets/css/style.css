@@ -1,44 +1,44 @@
 body {
-    font-family: "Lato", sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 .pl {
-    list-style: none;
+  list-style: none;
 }
 
 .pl li::before {
-    content: "\003E";
+  content: "\003E";
 }
 
 form > a {
-    color:  #000000;
+  color: #000000;
 }
 
 li > a {
-    color:  #000000;
+  color: #000000;
 }
 
 h1 {
-    color: #9f5540;
+  color: #9f5540;
 }
 
 .btn-red {
-    color: #fff;
-    background-color: #9f5540;
-    border-color: #9f5540;
+  color: #fff;
+  background-color: #9f5540;
+  border-color: #9f5540;
 }
 
 .btn-green {
-    color: #fff;
-    background-color: #5cb85c;
-    border-color: #5cb85c;
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
 }
 
 .arrow {
-    display: contents;
+  display: contents;
 }
 
 .text-red {
-    --bs-text-opacity: 1;
-    color: #9f5540;
+  --bs-text-opacity: 1;
+  color: #9f5540;
 }

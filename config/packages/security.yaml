@@ -2,7 +2,7 @@ security:
   enable_authenticator_manager: true
   # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
   password_hashers:
-    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
     App\Entity\User:
       algorithm: auto
 
@@ -37,14 +37,17 @@ security:
   access_control:
     # - { path: ^/admin, roles: ROLE_ADMIN }
     # - { path: ^/profile, roles: ROLE_USER }
-    - { path: ^/accueil, roles: [ ROLE_OWNER, ROLE_REPRESENTATIVE, ROLE_TENANT ] }
+    - { path: ^/accueil, roles: [ROLE_OWNER, ROLE_REPRESENTATIVE, ROLE_TENANT] }
     - { path: ^/locataire, roles: ROLE_OWNER }
     - { path: ^/inscription, roles: ROLE_OWNER }
     - { path: ^/inscriptionlocataire, roles: ROLE_OWNER }
     - { path: ^/inscriptionmandataire, roles: ROLE_OWNER }
     - { path: ^/mandataire, roles: ROLE_OWNER }
-    - { path: ^/bien, roles: [ ROLE_OWNER, ROLE_REPRESENTATIVE ] }
-    - { path: ^/location, roles: [ ROLE_OWNER, ROLE_REPRESENTATIVE, ROLE_TENANT ] }
+    - { path: ^/bien, roles: [ROLE_OWNER, ROLE_REPRESENTATIVE] }
+    - {
+        path: ^/location,
+        roles: [ROLE_OWNER, ROLE_REPRESENTATIVE, ROLE_TENANT],
+      }
   access_denied_url: /connexion
 when@test:
   security:
